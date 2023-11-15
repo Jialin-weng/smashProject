@@ -54,9 +54,11 @@ $list_of_friends = getAllFriends();
 <?php foreach ($list_of_friends as $friend): ?>
 
 <tr class="friend-row">
-<td name = "friendname"><?php echo $friend['c_name']; ?></td>
-<td><img src="images/banjo_kazooie.jpg" alt="Friend's Image" width="50" ></td>
-<td><?php echo $friend['popularity_count']; ?></td>
+  <td>
+<a href="characterPage.php">
+    <img id = "<?php echo $friend['c_name']; ?>" src="images/banjo_kazooie.jpg" alt="Friend's Image" width="100" >
+</a>
+</td>
 </tr>
 <?php endforeach; ?>
 

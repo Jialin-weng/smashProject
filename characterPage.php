@@ -4,26 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Smash</title>
-    <style>
-        body {
-          background-image: url('images/Smash_Ball.svg.png');
-          background-size: 100% 100%;
-          background-repeat: no-repeat;
-          background-attachment: fixed;
-        }
-        .centered-text {
-        text-align: center;
-        position: absolute;
-        top: 40%;
-        left: 60%;
-        transform: translate(-50%, -50%);
-        color: white;
-        font-family: "Times New Roman", serif;
-        }
-      </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet"> <!-- Link Bootstrap Icons library -->
-
   </head>
 
 
@@ -33,11 +14,10 @@
         <ul class="navbar-nav">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Menu 
+              Menu
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="characters.php">Characters <i class="bi bi-person-arms-up"></i>
-              </a></li>
+              <li><a class="dropdown-item" href="characters.php">Characters</a></li>
               <li><a class="dropdown-item" href="findMatch.php">Find Match</a></li>
               <!-- <li><hr class="dropdown-divider"></li> -->
               <li><a class="dropdown-item" href="highlights.php">Highlights</a></li>
@@ -60,12 +40,14 @@
       </div>
     </div>
   </nav>
+
+
   <body>
-    <div class="centered-text">
-        <h1>Hoo's Down For Smash</h1>
-      </div>
+    <h1>Character Page</h1>
+    <div class="position-fixed bottom-0 end-0 p-3">
+    <a href="characters.php" class="btn btn-primary" >Back</a>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/page/page.js"></script>
   </body>
   
 </html>
