@@ -1,3 +1,12 @@
+<?php
+$username = isset($_POST['username']) ? $_POST['username'] : '';
+$password = isset($_POST['password']) ? $_POST['password'] : '';
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  echo $_POST['username'];
+}
+?>
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -31,7 +40,7 @@
             <a class="nav-link active" aria-current="page" href="index.html">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="login.html">Login</a>
+            <a class="nav-link" href="login.php">Login</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="profile.html">Profile</a>
@@ -43,7 +52,29 @@
 
 
   <body>
-    <h1>Login</h1>
+  <br></br>
+    <form name="mainForm" action="login.php" method="post">   
+      <div class="row mb-3 mx-3">
+        <input type="text" class="form-control" name="username" required value = "" placeholder = "Username">        
+      </div>  
+      <div class="row mb-3 mx-3">
+        <input type="password"  name ="userPassword " class="form-control" placeholder = "Password" aria-describedby="passwordHelpBlock" required
+        value = "">
+      
+      </div>  
+      <div class="row mb-3 mx-3">
+        <div class ="col-12 text-center" >
+        <input type="submit" value="Login" name="addBtn" class="btn btn-primary" title="Login" />
+</div>  
+      </div>  
+      <div class="row mb-3 mx-3">
+      <div class ="col-12 text-center" >
+        <button type ="button" class="btn btn-secondary
+        ">Signup</button>
+</div>
+      </div>
+    </form>  
+  
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </body>
   
