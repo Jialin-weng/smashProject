@@ -1,4 +1,8 @@
 <?php
+require("connect-db.php");
+require("db_functions.php");
+$list_of_friends = getAllFriends();
+
 $username = isset($_POST['username']) ? $_POST['username'] : '';
 $password = isset($_POST['password']) ? $_POST['password'] : '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -77,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </div>
       </div>
     </form>  
-  
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </body>
   
