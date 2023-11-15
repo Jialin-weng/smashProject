@@ -17,24 +17,24 @@
               Menu <i class="bi bi-list"></i> 
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="characters.html">Characters</a></li>
-              <li><a class="dropdown-item" href="findMatch.html">Find Match</a></li>
+              <li><a class="dropdown-item" href="characters.php">Characters</a></li>
+              <li><a class="dropdown-item" href="findMatch.php">Find Match</a></li>
               <!-- <li><hr class="dropdown-divider"></li> -->
-              <li><a class="dropdown-item" href="highlights.html">Highlights</a></li>
-              <li><a class="dropdown-item" href="leaderboard.html">Leaderboard</a></li>
+              <li><a class="dropdown-item" href="highlights.php">Highlights</a></li>
+              <li><a class="dropdown-item" href="leaderboard.php">Leaderboard</a></li>
 
             </ul>
           </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+            <a class="nav-link active" aria-current="page" href="index.php">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="login.php">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="profile.html">Profile</a>
+            <a class="nav-link" href="profile.php">Profile</a>
           </li>
         </ul>
       </div>

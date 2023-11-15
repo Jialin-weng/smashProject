@@ -3,6 +3,9 @@ $username = isset($_POST['username']) ? $_POST['username'] : '';
 $password = isset($_POST['password']) ? $_POST['password'] : '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   echo $_POST['username'];
+  $space = "\n";
+  echo nl2br($space);
+  echo $_POST['userPassword'];
 }
 ?>
 
@@ -26,24 +29,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               Menu
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="characters.html">Characters</a></li>
-              <li><a class="dropdown-item" href="findMatch.html">Find Match</a></li>
+              <li><a class="dropdown-item" href="characters.php">Characters</a></li>
+              <li><a class="dropdown-item" href="findMatch.php">Find Match</a></li>
               <!-- <li><hr class="dropdown-divider"></li> -->
-              <li><a class="dropdown-item" href="highlights.html">Highlights</a></li>
-              <li><a class="dropdown-item" href="leaderboard.html">Leaderboard</a></li>
+              <li><a class="dropdown-item" href="highlights.php">Highlights</a></li>
+              <li><a class="dropdown-item" href="leaderboard.php">Leaderboard</a></li>
 
             </ul>
           </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+            <a class="nav-link active" aria-current="page" href="index.php">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="login.php">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="profile.html">Profile</a>
+            <a class="nav-link" href="profile.php">Profile</a>
           </li>
         </ul>
       </div>
@@ -58,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <input type="text" class="form-control" name="username" required value = "" placeholder = "Username">        
       </div>  
       <div class="row mb-3 mx-3">
-        <input type="password"  name ="userPassword " class="form-control" placeholder = "Password" aria-describedby="passwordHelpBlock" required
+        <input type="password"  name ="userPassword" class="form-control" placeholder = "Password" aria-describedby="passwordHelpBlock" required
         value = "">
       
       </div>  
