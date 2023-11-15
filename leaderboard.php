@@ -14,27 +14,27 @@
         <ul class="navbar-nav">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Menu
+              Menu <i class="bi bi-list"></i> 
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="characters.html">Characters</a></li>
-              <li><a class="dropdown-item" href="findMatch.html">Find Match</a></li>
+              <li><a class="dropdown-item" href="characters.php">Characters</a></li>
+              <li><a class="dropdown-item" href="findMatch.php">Find Match</a></li>
               <!-- <li><hr class="dropdown-divider"></li> -->
-              <li><a class="dropdown-item" href="highlights.html">Highlights</a></li>
-              <li><a class="dropdown-item" href="leaderboard.html">Leaderboard</a></li>
+              <li><a class="dropdown-item" href="highlights.php">Highlights</a></li>
+              <li><a class="dropdown-item" href="leaderboard.php">Leaderboard</a></li>
 
             </ul>
           </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+            <a class="nav-link active" aria-current="page" href="index.php">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="login.html">Login</a>
+            <a class="nav-link" href="login.php">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="profile.html">Profile</a>
+            <a class="nav-link" href="profile.php">Profile</a>
           </li>
         </ul>
       </div>
@@ -43,7 +43,7 @@
 
 
   <body>
-    <h1>findMatch</h1>
+    <h1>leaderboard</h1>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </body>
   
