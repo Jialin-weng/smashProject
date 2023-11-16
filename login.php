@@ -75,8 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       </div>  
       <div class="row mb-3 mx-3">
       <div class ="col-12 text-center" >
-        <button type ="button" class="btn btn-secondary
-        ">Signup</button>
+        <a href="signUp.php" class="btn btn-secondary">Signup </a>
 </div>
       </div>
     </form>  
