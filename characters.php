@@ -1,7 +1,7 @@
 <?php
 require("connect-db.php");
 require("db_functions.php");
-$list_of_friends = getAllCharacters();
+$list_of_characters = getAllCharacters();
 ?>
 
 <!doctype html>
@@ -51,17 +51,17 @@ $list_of_friends = getAllCharacters();
   </body>
   <table class="w3-table w3-bordered w3-card-4 center" style="width:70%">
 
-<?php foreach ($list_of_friends as $friend): ?>
+<?php foreach ($list_of_characters as $characters): ?>
 
-<tr class="friend-row">
+<tr class="Character-row">
 <?php
-$c_name_first = $friend['c_name']; // Assuming $friend['c_name'] is your original string
+$c_name_first = $characters['c_name']; // Assuming $friend['c_name'] is your original string
 $c_name_first = str_replace('.', '', $c_name_first); // Remove all periods
 $c_name_jpg = "images/{$c_name_first}.jpg"; // Append ".jpg" to the end
 ?>
   <td>
-<a href="characterPage.php?name=<?php echo $friend['c_name']; ?>">
-    <img id = "<?php echo $friend['c_name']; ?>" src= "<?php echo $c_name_jpg; ?>"  alt="Friend's Image" width="100" >
+<a href="characterPage.php?name=<?php echo $characters['c_name']; ?>">
+    <img id = "<?php echo $characters['c_name']; ?>" src= "<?php echo $c_name_jpg; ?>"  alt="Friend's Image" width="100" >
 </a>
 </td>
 </tr>
