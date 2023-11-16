@@ -54,9 +54,14 @@ $list_of_friends = getAllCharacters();
 <?php foreach ($list_of_friends as $friend): ?>
 
 <tr class="friend-row">
+<?php
+$c_name_first = $friend['c_name']; // Assuming $friend['c_name'] is your original string
+$c_name_first = str_replace('.', '', $c_name_first); // Remove all periods
+$c_name_jpg = "images/{$c_name_first}.jpg"; // Append ".jpg" to the end
+?>
   <td>
-<a href="characterPage.php">
-    <img id = "<?php echo $friend['c_name']; ?>" src="images/banjo_kazooie.jpg" alt="Friend's Image" width="100" >
+<a href="characterPage.php?name=<?php echo $friend['c_name']; ?>">
+    <img id = "<?php echo $friend['c_name']; ?>" src= "<?php echo $c_name_jpg; ?>"  alt="Friend's Image" width="100" >
 </a>
 </td>
 </tr>

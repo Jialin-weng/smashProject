@@ -1,3 +1,13 @@
+<?php
+require("connect-db.php");
+require("db_functions.php");
+$c_name_first = isset($_GET['name']) ? $_GET['name'] : '';
+$characterName = $c_name_first;
+$c_name_first = str_replace('.', '', $c_name_first);
+$c_name_jpg = "images/{$c_name_first}.jpg";
+$list_of_attacks =  getAttacksByCharacterName($characterName);
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -43,10 +53,35 @@
 
 
   <body>
-    <h1>Character Page</h1>
+    <h1><?php echo $characterName; ?></h1>
+    <img src= "<?php echo $c_name_jpg; ?>"  alt="Friend's Image" width="100" >
+<table class="w3-table w3-bordered w3-card-4 center" style="width:70%">
+<td>Move Name</td>
+<td>Shield Stun</td>
+<td>Start Up Frame</td>
+<td>End Lag</td>
+<td>Damage</td>
+
+<?php foreach ($list_of_attacks as $attacks): ?>
+    <tr class="friend-row">
+        
+    <td><?php echo $attacks['move_name']; ?></td>
+    <td><?php echo $attacks['shield_stun']; ?></td>
+    <td><?php echo $attacks['start_up_frames']; ?></td>
+    <td><?php echo $attacks['end_lag']; ?></td>
+    <td><?php echo $attacks['damage']; ?></td>
+
+</tr>
+    <?php endforeach; ?>
     <div class="position-fixed bottom-0 end-0 p-3">
     <a href="characters.php" class="btn btn-primary" >Back</a>
     </div>
+    <?php
+?>
+</table>
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </body>
   
