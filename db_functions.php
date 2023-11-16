@@ -25,7 +25,7 @@ function getAttacksByCharacterName($characterName)
 function getAerialsByCharacterName($characterName)
 {
     global $db;
-    $query = "select * from Attack where c_name = :characterName";
+    $query = "select * from Aerial where c_name = :characterName";
     $statement = $db->prepare($query);
     $statement->bindParam(':characterName', $characterName);
     $statement->execute();
@@ -34,6 +34,17 @@ function getAerialsByCharacterName($characterName)
     return $results;
 }
 
+function getDodgesByCharacterName($characterName)
+{
+    global $db;
+    $query = "select * from Dodges where c_name = :characterName";
+    $statement = $db->prepare($query);
+    $statement->bindParam(':characterName', $characterName);
+    $statement->execute();
+    $results = $statement->fetchAll();
+    $statement->closeCursor();
+    return $results;
+}
 
 
 ?>

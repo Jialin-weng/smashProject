@@ -6,6 +6,8 @@ $characterName = $c_name_first;
 $c_name_first = str_replace('.', '', $c_name_first);
 $c_name_jpg = "images/{$c_name_first}.jpg";
 $list_of_attacks = getAttacksByCharacterName($characterName);
+$list_of_aerials = getAerialsByCharacterName($characterName);
+$list_of_dodges = getDodgesByCharacterName($characterName);
 ?>
 
 <!doctype html>
@@ -56,49 +58,119 @@ $list_of_attacks = getAttacksByCharacterName($characterName);
 
 
 <body>
-    <h1>
-        <?php echo $characterName; ?>
-    </h1>
-    <img src="<?php echo $c_name_jpg; ?>" alt="Friend's Image" width="100">
-    <h2 class="text-center mt-4">List of Attacks</h2>
+    <div class="container mt-5 text-center">
 
-    <table class="table table-bordered table-striped mx-auto" style="width:70%">
-        <td>Move Name</td>
-        <td>Shield Stun</td>
-        <td>Start Up Frame</td>
-        <td>End Lag</td>
-        <td>Damage</td>
+        <h1>
+            <?php echo $characterName; ?>
+        </h1>
+        <img src="<?php echo $c_name_jpg; ?>" alt="Friend's Image" width="100">
+        <h2 class="text-center mt-4">List of Attacks</h2>
 
-        <?php foreach ($list_of_attacks as $attacks): ?>
-            <tr class="friend-row">
+        <table class="table table-bordered table-striped mx-auto" style="width:70%">
+            <td>Move Name</td>
+            <td>Shield Stun</td>
+            <td>Start Up Frame</td>
+            <td>End Lag</td>
+            <td>Damage</td>
 
-                <td>
-                    <?php echo $attacks['move_name']; ?>
-                </td>
-                <td>
-                    <?php echo $attacks['shield_stun']; ?>
-                </td>
-                <td>
-                    <?php echo $attacks['start_up_frames']; ?>
-                </td>
-                <td>
-                    <?php echo $attacks['end_lag']; ?>
-                </td>
-                <td>
-                    <?php echo $attacks['damage']; ?>
-                </td>
+            <?php foreach ($list_of_attacks as $attacks): ?>
+                <tr class="friend-row">
 
-            </tr>
-        <?php endforeach; ?>
-        <div class="position-fixed bottom-0 end-0 p-3">
-            <a href="characters.php" class="btn btn-primary">Back</a>
-        </div>
-        <?php
-        ?>
-    </table>
+                    <td>
+                        <?php echo $attacks['move_name']; ?>
+                    </td>
+                    <td>
+                        <?php echo $attacks['shield_stun']; ?>
+                    </td>
+                    <td>
+                        <?php echo $attacks['start_up_frames']; ?>
+                    </td>
+                    <td>
+                        <?php echo $attacks['end_lag']; ?>
+                    </td>
+                    <td>
+                        <?php echo $attacks['damage']; ?>
+                    </td>
+
+                </tr>
+            <?php endforeach; ?>
+            <div class="position-fixed bottom-0 end-0 p-3">
+                <a href="characters.php" class="btn btn-primary">Back</a>
+            </div>
+            <?php
+            ?>
+        </table>
+        <h2 class="text-center mt-4">List of Aerials</h2>
 
 
+        <table class="table table-bordered table-striped mx-auto" style="width:70%">
+            <td>Move Name</td>
+            <td>Shield Stun</td>
+            <td>Start Up Frame</td>
+            <td>End Lag</td>
+            <td>Landing Lag</td>
+            <td>Damage</td>
 
+            <?php foreach ($list_of_aerials as $attacks): ?>
+                <tr class="friend-row">
+
+                    <td>
+                        <?php echo $attacks['move_name']; ?>
+                    </td>
+                    <td>
+                        <?php echo $attacks['shield_stun']; ?>
+                    </td>
+                    <td>
+                        <?php echo $attacks['start_up_frames']; ?>
+                    </td>
+                    <td>
+                        <?php echo $attacks['end_lag']; ?>
+                    </td>
+                    <td>
+                        <?php echo $attacks['landing_lag']; ?>
+                    </td>
+                    <td>
+                        <?php echo $attacks['damage']; ?>
+                    </td>
+
+                </tr>
+            <?php endforeach; ?>
+            <div class="position-fixed bottom-0 end-0 p-3">
+                <a href="characters.php" class="btn btn-primary">Back</a>
+            </div>
+            <?php
+            ?>
+        </table>
+
+        <h2 class="text-center mt-4">List of Dodges</h2>
+
+
+        <table class="table table-bordered table-striped mx-auto" style="width:70%">
+            <td>Move Name</td>
+            <td>Total Frame</td>
+            <td>Intangible Frame</td>
+            <?php foreach ($list_of_dodges as $dodges): ?>
+                <tr class="friend-row">
+
+                    <td>
+                        <?php echo $dodges['move_name']; ?>
+                    </td>
+                    <td>
+                        <?php echo $dodges['total_frame']; ?>
+                    </td>
+                    <td>
+                        <?php echo $dodges['intangible_frame']; ?>
+                    </td>
+
+                </tr>
+            <?php endforeach; ?>
+            <div class="position-fixed bottom-0 end-0 p-3">
+                <a href="characters.php" class="btn btn-primary">Back</a>
+            </div>
+            <?php
+            ?>
+        </table>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
         </script>
