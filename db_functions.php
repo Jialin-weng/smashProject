@@ -1,5 +1,5 @@
 <?php
-function getAllFriends()
+function getAllCharacters()
 {
   global $db;
   $query = "select * from CharacterImagePopularity";

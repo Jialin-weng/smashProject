@@ -1,7 +1,7 @@
 <?php
 require("connect-db.php");
 require("db_functions.php");
-$list_of_friends = getAllFriends();
+$list_of_friends = getAllCharacters();
 ?>
 
 <!doctype html>
