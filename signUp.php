@@ -1,3 +1,9 @@
+<?php
+require("connect-db.php");
+require("db_functions.php");
+$list_of_characters = getAllCharacters();
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -116,10 +122,17 @@
         </div>   
         
         <!-- character_name -->
-        <div class="form-floating row mb-3 mx-3">
-            <input type="text"  name ="characterName" class="form-control" placeholder = "Main" required value = "">
-            <label for="characterName">Main</label>
+        <div class="row mb-3 mx-3">
+            <select class="form-select" aria-label="Default select example">
+                <option value="Default">Main</option>
+                <?php foreach ($list_of_characters as $characters): ?>
+
+                <?php $c_name_first = $characters['c_name'];  ?>
+                <option value="<?php echo $characters['c_name']; ?>"><?php echo $characters['c_name']; ?> </option>
+                <?php endforeach; ?>
+            </select>
         </div>
+
         <!-- ruleset_id -->
         <div class="form-floating row mb-3 mx-3">
             <input type="text"  name ="ruleset_id" class="form-control" placeholder = "Ruleset" required value = "">
