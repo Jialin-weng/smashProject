@@ -1,7 +1,7 @@
 <?php
 require("connect-db.php");
 require("db_functions.php");
-$list_of_friends = getAllFriends();
+$list_of_friends = getAllCharacters();
 
 $username = isset($_POST['username']) ? $_POST['username'] : '';
 $password = isset($_POST['password']) ? $_POST['password'] : '';
