@@ -60,24 +60,36 @@ $list_of_matches = getAllMatches();
     <div class="container mt-5 text-center"> 
         <h1>Find a Match</h1>
     
-
+        <!-- need to add friend code, ruleset, character, level of play from User1 -->
+        <!-- query language:
+        username1, username2, arena_code, friend_code, region, self_rating, character_name, r.hazards, r.smash_meter, r.objective, r.stage, r.items, r.time
+-->
+        <!-- let User1 be the arena creator, and temporarily assign a "dummy" user to them. Let other users join this row. 
+            Once two legitimate users have joined a row, gray it out/make it non-joinable. Once, User1 leaves the arena, then we can delete the row from the database
+-->
         <div class="row row-cols-2">
             <table class="table table-bordered table-striped mx-auto" style="width:70%">
-                <th>User 1</td>
-                <th>User 2</td>
-                <th>Arena Code</td>
+                <th>User 1</th>
+                <th>Friend_code</th>
+                <th>Region</th>
+                <th>GSP</th>
+                <th>Character</th>
+                <th>Ruleset</th>
+                <th>User 2</th>
+                <th>Arena Code</th>
+                
     
                 <?php foreach ($list_of_matches as $matches): ?>
                     <tr class="friend-row">
                         <td>
                             <?php echo $matches['username1']; ?>
                         </td>
-                            <td>
-                                <?php echo $matches['username2']; ?>
-                            </td>
-                            <td>
-                                <?php echo $matches['arena_code']; ?>
-                            </td>
+                        <td>
+                            <?php echo $matches['username2']; ?>
+                        </td>
+                        <td>
+                            <?php echo $matches['arena_code']; ?>
+                        </td>
                     </tr>
                     <?php endforeach; ?>
 
