@@ -12,6 +12,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 
+<?php
+
+session_start();
+
+if (isset($_SESSION['signup_success']) && $_SESSION['signup_success']) {
+  echo '<script>alert("Signup successful! Please log in.");</script>';
+  unset($_SESSION['signup_success']);
+}
+?>
+
 
 <!doctype html>
 <html lang="en">
