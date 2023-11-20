@@ -8,6 +8,11 @@ $list_of_characters = getAllCharacters();
 <html lang="en">
 
 <head>
+    <style>
+        .no-underline {
+            text-decoration: none;
+        }
+    </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Smash</title>
@@ -52,23 +57,27 @@ $list_of_characters = getAllCharacters();
 <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-    </script>
+        </script>
 </body>
 <div class="container text-center">
+    <h1>Characters</h1>
     <div class="row row-cols-4">
         <?php foreach ($list_of_characters as $characters): ?>
-        <?php
-      $c_name_first = $characters['c_name']; // Assuming $friend['c_name'] is your original string
-      $c_name_first = str_replace('.', '', $c_name_first); // Remove all periods
-      $c_name_first = str_replace('/', ':', $c_name_first);
-      $c_name_jpg = "images/{$c_name_first}.jpg"; // Append ".jpg" to the end
-      ?>
-        <div class="col">
-            <a href="characterPage.php?name=<?php echo $characters['c_name']; ?>">
-                <img id="<?php echo $characters['c_name']; ?>" src="<?php echo $c_name_jpg; ?>"
-                    alt="<?php echo $characters['c_name']; ?>" width="100">
-            </a>
-        </div>
+            <?php
+            $c_name_first = $characters['c_name']; // Assuming $friend['c_name'] is your original string
+            $c_name_first = str_replace('.', '', $c_name_first); // Remove all periods
+            $c_name_first = str_replace('/', ':', $c_name_first);
+            $c_name_jpg = "images/{$c_name_first}.jpg"; // Append ".jpg" to the end
+            ?>
+            <div class="col" style="margin-top: 20px; margin-bottom: 20px;">
+                <a href="characterPage.php?name=<?php echo $characters['c_name']; ?>" class=no-underline>
+                    <img id="<?php echo $characters['c_name']; ?>" src="<?php echo $c_name_jpg; ?>"
+                        alt="<?php echo $characters['c_name']; ?>" width="100">
+                    <h6>
+                        <?php echo $characters['c_name']; ?>
+                    </h6>
+                </a>
+            </div>
         <?php endforeach; ?>
 
     </div>

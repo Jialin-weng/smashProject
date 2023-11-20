@@ -8,6 +8,8 @@ $c_name_jpg = "images/{$c_name_first}.jpg";
 $list_of_attacks = getAttacksByCharacterName($characterName);
 $list_of_aerials = getAerialsByCharacterName($characterName);
 $list_of_dodges = getDodgesByCharacterName($characterName);
+$list_of_grabs = getGrabByCharacterName($characterName);
+$list_of_grabsOptions = getGrabOptionsByCharacterName($characterName);
 ?>
 
 <!doctype html>
@@ -63,7 +65,7 @@ $list_of_dodges = getDodgesByCharacterName($characterName);
         <h1>
             <?php echo $characterName; ?>
         </h1>
-        <img src="<?php echo $c_name_jpg; ?>" alt="Friend's Image" width="100">
+        <img src="<?php echo $c_name_jpg; ?>" alt="Friend's Image" width="200">
         <h2 class="text-center mt-4">List of Attacks</h2>
 
         <table class="table table-bordered table-striped mx-auto" style="width:70%">
@@ -170,6 +172,65 @@ $list_of_dodges = getDodgesByCharacterName($characterName);
             <?php
             ?>
         </table>
+        <h2 class="text-center mt-4">Grab</h2>
+
+
+        <table class="table table-bordered table-striped mx-auto" style="width:70%">
+            <td>Move Name</td>
+            <td>Start Up Frame</td>
+            <td>End Frame</td>
+            <?php foreach ($list_of_grabs as $grab): ?>
+                <tr class="friend-row">
+
+                    <td>
+                        <?php echo $grab['move_name']; ?>
+                    </td>
+                    <td>
+                        <?php echo $grab['start_up_frames']; ?>
+                    </td>
+                    <td>
+                        <?php echo $grab['end_frames']; ?>
+                    </td>
+
+                </tr>
+            <?php endforeach; ?>
+            <div class="position-fixed bottom-0 end-0 p-3">
+                <a href="characters.php" class="btn btn-primary">Back</a>
+            </div>
+            <?php
+            ?>
+        </table>
+
+        <h2 class="text-center mt-4">Grab Options</h2>
+
+
+        <table class="table table-bordered table-striped mx-auto" style="width:70%">
+            <td>Move Name</td>
+            <td>Start Up Frame</td>
+            <td>End Frame</td>
+            <?php foreach ($list_of_grabsOptions as $grabOption): ?>
+                <tr class="friend-row">
+
+                    <td>
+                        <?php echo $grabOption['move_name']; ?>
+                    </td>
+                    <td>
+                        <?php echo $grabOption['damage']; ?>
+                    </td>
+                    <td>
+                        <?php echo $grabOption['total_frame']; ?>
+                    </td>
+
+                </tr>
+            <?php endforeach; ?>
+            <div class="position-fixed bottom-0 end-0 p-3">
+                <a href="characters.php" class="btn btn-primary">Back</a>
+            </div>
+            <?php
+            ?>
+        </table>
+
+
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">

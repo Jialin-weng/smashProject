@@ -46,5 +46,41 @@ function getDodgesByCharacterName($characterName)
     return $results;
 }
 
+function getGrabByCharacterName($characterName)
+{
+    global $db;
+    $query = "select * from Grab where c_name = :characterName";
+    $statement = $db->prepare($query);
+    $statement->bindParam(':characterName', $characterName);
+    $statement->execute();
+    $results = $statement->fetchAll();
+    $statement->closeCursor();
+    return $results;
+}
+
+function getGrabOptionsByCharacterName($characterName)
+{
+    global $db;
+    $query = "select * from GrabOption where c_name = :characterName";
+    $statement = $db->prepare($query);
+    $statement->bindParam(':characterName', $characterName);
+    $statement->execute();
+    $results = $statement->fetchAll();
+    $statement->closeCursor();
+    return $results;
+}
+function getShieldByCharacterName($characterName)
+{
+    global $db;
+    $query = "select * from Shield where c_name = :characterName";
+    $statement = $db->prepare($query);
+    $statement->bindParam(':characterName', $characterName);
+    $statement->execute();
+    $results = $statement->fetchAll();
+    $statement->closeCursor();
+    return $results;
+}
+
+
 
 ?>
