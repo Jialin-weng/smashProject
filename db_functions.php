@@ -82,5 +82,17 @@ function getShieldByCharacterName($characterName)
 }
 
 
+function getAllHighlights()
+{
+    global $db;
+    $query = "select * from Highlights";
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $results = $statement->fetchAll();
+    $statement->closeCursor();
+    return $results;
+}
+
+
 
 ?>
