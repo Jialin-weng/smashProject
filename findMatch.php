@@ -1,3 +1,9 @@
+<?php
+require("connect-db.php");
+require("db_functions.php");
+$list_of_matches = getAllMatches();
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -50,6 +56,36 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
         </script>
+    <div class="row row-cols-2">
+
+    <table class="table table-bordered table-striped mx-auto" style="width:70%">
+        <td>User 1</td>
+        <td>User 2</td>
+        <td>Arena Code</td>
+   
+        <?php foreach ($list_of_matches as $matches): ?>
+            <tr class="friend-row">
+                <td>
+                    <?php echo $matches['username1']; ?>
+                </td>
+                    <td>
+                        <?php echo $matches['username2']; ?>
+                    </td>
+                    <td>
+                        <?php echo $matches['arena_code']; ?>
+                    </td>
+            </tr>
+            <?php endforeach; ?>
+
+            <div class="position-fixed bottom-0 end-1 p-3">
+                <a href="characters.php" class="btn btn-primary">Can't find a suitable match? Create one!</a>
+            </div>
+            <?php
+            ?>
+    </table>
+
+</div>
+
 </body>
 
 </html>
