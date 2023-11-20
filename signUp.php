@@ -2,6 +2,15 @@
 require("connect-db.php");
 require("db_functions.php");
 $list_of_characters = getAllCharacters();
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  if (!empty($_POST['signupButton'])) {
+    signUp($_POST['username'], $_POST['firstName'], $_POST['lastName'], $_POST['friendCode'], $_POST['region'], $_POST['selfrating'], $_POST['character'], $_POST['ruleset_id']);
+    session_start();
+    $_SESSION['signup_success'] = true;
+    header("Location: login.php");
+    exit;
+  }
+}
 ?>
 
 <!doctype html>
@@ -60,7 +69,7 @@ $list_of_characters = getAllCharacters();
 
   <!-- FIELDS: -->
 
-  <form name="mainForm" action="login.php" method="post">
+  <form name="mainForm" action="signUp.php" method="post">
     <!-- username PRIMARY KEY-->
     <div class="form-floating row mb-3 mx-3">
       <input id="username" type="text" class="form-control" name="username" required value=""
@@ -97,46 +106,45 @@ $list_of_characters = getAllCharacters();
     </div>
     <!-- region -->
     <div class="mb-3 mx-3">
-      <select class="form-select" aria-label="Default select example">
+      <select name="region" class="form-select" aria-label="Default select example">
         <option selected>Region</option>
-        <option value="1">Baja California</option>
-        <option value="2">Bolivia</option>
-        <option value="3">Central Mexico</option>
-        <option value="4">Chubu</option>
-        <option value="5">Chugoku</option>
-        <option value="6">Florida</option>
-        <option value="7">Georgia</option>
-        <option value="8">Hokkaido</option>
-        <option value="9">Hokuriku</option>
-        <option value="10">Japan</option>
-        <option value="11">Kansai</option>
-        <option value="12">Kanto</option>
-        <option value="13">Kyushu</option>
-        <option value="14">Maryland-Virginia</option>
-        <option value="15">Michigan</option>
-        <option value="16">Netheerlands</option>
-        <option value="17">New England</option>
-        <option value="18">Northern California</option>
-        <option value="19">Okinawa</option>
-        <option value="20">Pacific Northwest</option>
-        <option value="21">Shikoku</option>
-        <option value="22">South Korea</option>
-        <option value="23">Soutern California</option>
-        <option value="24">Southwest</option>
-        <option value="25">Texas</option>
-        <option value="26">Tristate Area</option>
-        <option value="27">Tohoku</option>
-        <option value="28">United Kingdom and Ireland</option>
+        <option value="Baja California">Baja California</option>
+        <option value="Bolivia">Bolivia</option>
+        <option value="Central Mexico">Central Mexico</option>
+        <option value="Chubu">Chubu</option>
+        <option value="Chugoku">Chugoku</option>
+        <option value="Florida">Florida</option>
+        <option value="Georgia">Georgia</option>
+        <option value="Hokkaido">Hokkaido</option>
+        <option value="Hokuriku">Hokuriku</option>
+        <option value="Japan">Japan</option>
+        <option value="Kansai">Kansai</option>
+        <option value="Kanto">Kanto</option>
+        <option value="Kyushu">Kyushu</option>
+        <option value="Maryland-Virginia">Maryland-Virginia</option>
+        <option value="Michigan">Michigan</option>
+        <option value="Netheerlands">Netheerlands</option>
+        <option value="New England">New England</option>
+        <option value="Northern California">Northern California</option>
+        <option value="Okinawa">Okinawa</option>
+        <option value="Pacific Northwest">Pacific Northwest</option>
+        <option value="Shikoku">Shikoku</option>
+        <option value="South Korea">South Korea</option>
+        <option value="Soutern California">Soutern California</option>
+        <option value="Southwest">Southwest</option>
+        <option value="Texas">Texas</option>
+        <option value="Tristate Area">Tristate Area</option>
+        <option value="Tohoku">Tohoku</option>
+        <option value="United Kingdom and Ireland">United Kingdom and Ireland</option>
 
       </select>
     </div>
 
     <!-- character_name -->
     <div class="row mb-3 mx-3">
-      <select class="form-select" aria-label="Default select example">
+      <select name="character" class="form-select" aria-label="Default select example">
         <option value="Default">Main</option>
         <?php foreach ($list_of_characters as $characters): ?>
-
           <?php $c_name_first = $characters['c_name']; ?>
           <option value="<?php echo $characters['c_name']; ?>">
             <?php echo $characters['c_name']; ?>
@@ -153,7 +161,8 @@ $list_of_characters = getAllCharacters();
 
     <div class="row mb-3 mx-3">
       <div class="col-12 text-center">
-        <a href="index.php" class="btn btn-secondary">Signup </a>
+        <input type="submit" value="Signup" name="signupButton" class="btn btn-primary"
+          title="Insert a friend into a friends table" />
       </div>
     </div>
   </form>

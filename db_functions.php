@@ -93,6 +93,21 @@ function getAllHighlights()
     return $results;
 }
 
-
+function signUp($username, $first_name, $last_name, $friend_code, $region, $self_rating, $character_name, $ruleset_id)
+{
+    global $db;
+    $query = "insert into Users values (:username, :first_name, :last_name, :friend_code, :region, :self_rating, :character_name, :ruleset_id) ";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':username', $username);
+    $statement->bindValue(':first_name', $first_name);
+    $statement->bindValue(':last_name', $last_name);
+    $statement->bindValue(':friend_code', $friend_code);
+    $statement->bindValue(':region', $region);
+    $statement->bindValue(':self_rating', $self_rating);
+    $statement->bindValue(':character_name', $character_name);
+    $statement->bindValue(':ruleset_id', $ruleset_id);
+    $statement->execute();
+    $statement->closeCursor();
+}
 
 ?>
