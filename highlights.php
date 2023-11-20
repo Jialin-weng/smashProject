@@ -1,3 +1,8 @@
+<?php
+require("connect-db.php");
+require("db_functions.php");
+$list_of_highlights = getAllHighlights();
+?>
 <!doctype html>
 <html lang="en">
 
@@ -46,10 +51,36 @@
 
 
 <body>
-    <h1>Highlights</h1>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-    </script>
+        </script>
+    <div class="container text-center">
+        <h1>Highlights</h1>
+        <div class="row row-cols-2">
+
+            <?php foreach ($list_of_highlights as $highlights): ?>
+                <?php
+                $youtubeUrl = $highlights['video'];
+                $urlParts = parse_url($youtubeUrl);
+                parse_str($urlParts['query'], $queryParameters);
+                $videoId = isset($queryParameters['v']) ? $queryParameters['v'] : '';
+                $embedUrl = "https://www.youtube.com/embed/" . $videoId;
+                ?>
+
+                <div class="col" style="margin-top: 20px; margin-bottom: 20px;">
+                    <h4>
+                        <?php echo $highlights['username'];
+                        ; ?>
+                    </h4>
+
+                    <iframe width="560" height="315" src="<?php echo $embedUrl; ?>" frameborder="0"
+                        allowfullscreen></iframe>
+
+                </div>
+            <?php endforeach; ?>
+
+        </div>
+    </div>
 </body>
 
 </html>
