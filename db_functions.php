@@ -93,6 +93,15 @@ function getAllHighlights()
     return $results;
 }
 
-
+function getAllMatches()
+{
+    global $db;
+    $query = "select * from Arena";
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $results = $statement->fetchAll();
+    $statement->closeCursor();
+    return $results;
+}
 
 ?>
