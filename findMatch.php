@@ -58,23 +58,23 @@ $list_of_matches = getAllMatches();
         </script>
     <div class="row row-cols-2">
 
-    <table class="table table-bordered table-striped mx-auto" style="width:70%">
-        <td>User 1</td>
-        <td>User 2</td>
-        <td>Arena Code</td>
-   
-        <?php foreach ($list_of_matches as $matches): ?>
-            <tr class="friend-row">
-                <td>
-                    <?php echo $matches['username1']; ?>
-                </td>
+        <table class="table table-bordered table-striped mx-auto" style="width:70%">
+            <td>User 1</td>
+            <td>User 2</td>
+            <td>Arena Code</td>
+
+            <?php foreach ($list_of_matches as $matches): ?>
+                <tr class="friend-row">
+                    <td>
+                        <?php echo $matches['username1']; ?>
+                    </td>
                     <td>
                         <?php echo $matches['username2']; ?>
                     </td>
                     <td>
                         <?php echo $matches['arena_code']; ?>
                     </td>
-            </tr>
+                </tr>
             <?php endforeach; ?>
 
             <div class="position-fixed bottom-0 end-1 p-3">
@@ -82,9 +82,9 @@ $list_of_matches = getAllMatches();
             </div>
             <?php
             ?>
-    </table>
+        </table>
 
-</div>
+    </div>
 
 </body>
 

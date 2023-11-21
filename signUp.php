@@ -4,7 +4,8 @@ require("db_functions.php");
 $list_of_characters = getAllCharacters();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (!empty($_POST['signupButton'])) {
-    signUp($_POST['username'], $_POST['firstName'], $_POST['lastName'], $_POST['friendCode'], $_POST['region'], $_POST['selfrating'], $_POST['character'], $_POST['ruleset_id']);
+    $hashedPassword = password_hash($_POST['userPassword'], PASSWORD_DEFAULT);
+    signUp($_POST['username'], $_POST['firstName'], $_POST['lastName'], $_POST['friendCode'], $_POST['region'], $_POST['selfrating'], $_POST['character'], $_POST['ruleset_id'], $hashedPassword);
     session_start();
     $_SESSION['signup_success'] = true;
     header("Location: login.php");

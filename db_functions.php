@@ -9,6 +9,18 @@ function getAllCharacters()
     $statement->closeCursor();
     return $results;
 }
+function getUserByUsername($username)
+{
+    global $db;
+    $query = "select * from Users where username = :username";
+    $statement = $db->prepare($query);
+    $statement->bindParam(':username', $username);
+    $statement->execute();
+    $user = $statement->fetch(PDO::FETCH_ASSOC);
+    $statement->closeCursor();
+    return $user;
+}
+
 
 function getAttacksByCharacterName($characterName)
 {
@@ -103,10 +115,10 @@ function getAllMatches()
     $statement->closeCursor();
     return $results;
 }
-function signUp($username, $first_name, $last_name, $friend_code, $region, $self_rating, $character_name, $ruleset_id)
+function signUp($username, $first_name, $last_name, $friend_code, $region, $self_rating, $character_name, $ruleset_id, $password)
 {
     global $db;
-    $query = "insert into Users values (:username, :first_name, :last_name, :friend_code, :region, :self_rating, :character_name, :ruleset_id) ";
+    $query = "insert into Users values (:username, :first_name, :last_name, :friend_code, :region, :self_rating, :character_name, :ruleset_id, :password)";
     $statement = $db->prepare($query);
     $statement->bindValue(':username', $username);
     $statement->bindValue(':first_name', $first_name);
@@ -116,8 +128,11 @@ function signUp($username, $first_name, $last_name, $friend_code, $region, $self
     $statement->bindValue(':self_rating', $self_rating);
     $statement->bindValue(':character_name', $character_name);
     $statement->bindValue(':ruleset_id', $ruleset_id);
+    $statement->bindValue(':password', $password);
     $statement->execute();
     $statement->closeCursor();
 }
+
+
 
 ?>
