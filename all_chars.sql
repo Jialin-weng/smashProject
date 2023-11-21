@@ -1,4 +1,4 @@
--- Create Banjo & Kazooie's moves
+ -- Create Banjo & Kazooie's moves
 INSERT INTO `Move` (`move_name`, `c_name`) VALUES
     ('Banjo & Kazooie Air Dodge', 'Banjo & Kazooie'),
     ('Banjo & Kazooie Back Aerial', 'Banjo & Kazooie'),
@@ -961,10 +961,10 @@ INSERT INTO `Dodges` (`move_name`, `total_frame`, `intangible_frame`, `c_name`) 
     ('Diddy Kong Spot Dodge', 19, 14, 'Diddy Kong'),
     ('Diddy Kong Forward Roll', 28, 11, 'Diddy Kong'),
     ('Diddy Kong Back Roll', 33, 12, 'Diddy Kong'),
-    ('Diddy Kong Air Dodge', 44, 28, 'Diddy Kong');
+    ('Diddy Kong Air Dodge', 44, 28, 'Diddy Kong'); 
 
 
--- Create Donkey Kong's moves
+ -- Create Donkey Kong's moves
 INSERT INTO `Move` (`move_name`, `c_name`) VALUES
     ('Donkey Kong Air Dodge', 'Donkey Kong'),
     ('Donkey Kong Back Aerial', 'Donkey Kong'),
@@ -1031,9 +1031,9 @@ INSERT INTO `Dodges` (`move_name`, `total_frame`, `intangible_frame`, `c_name`) 
     ('Donkey Kong Back Roll', 35, 12, 'Donkey Kong'),
     ('Donkey Kong Forward Roll', 30, 12, 'Donkey Kong'),
     ('Donkey Kong Spot Dodge', 21, 15, 'Donkey Kong');
+ 
 
-
--- Create Dr. Mario's moves
+ -- Create Dr. Mario's moves
 INSERT INTO `Move` (`move_name`, `c_name`) VALUES
     ('Dr. Mario Air Dodge', 'Dr. Mario'),
     ('Dr. Mario Back Aerial', 'Dr. Mario'),
@@ -1306,10 +1306,10 @@ INSERT INTO `Dodges` (`move_name`, `total_frame`, `intangible_frame`, `c_name`) 
     ('Fox Air Dodge', 38, 25, 'Fox'),
     ('Fox Back Roll', 32, 11, 'Fox'),
     ('Fox Forward Roll', 26, 9, 'Fox'),
-    ('Fox Spot Dodge', 18, 12, 'Fox');
+    ('Fox Spot Dodge', 18, 12, 'Fox'); 
 
 
--- Create Ganondorf's moves
+ -- Create Ganondorf's moves
 INSERT INTO `Move` (`move_name`, `c_name`) VALUES
     ('Ganondorf Air Dodge', 'Ganondorf'),
     ('Ganondorf Back Aerial', 'Ganondorf'),
@@ -1376,7 +1376,7 @@ INSERT INTO `Dodges` (`move_name`, `total_frame`, `intangible_frame`, `c_name`) 
     ('Ganondorf Forward Roll', 32, 13, 'Ganondorf'),
     ('Ganondorf Back Roll', 37, 13, 'Ganondorf'),
     ('Ganondorf Air Dodge', 46, 29, 'Ganondorf');
-
+ 
 
 -- Create Greninja's moves
 INSERT INTO `Move` (`move_name`, `c_name`) VALUES

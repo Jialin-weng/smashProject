@@ -70,7 +70,7 @@ $list_of_characters = getAllCharacters();
             $c_name_jpg = "images/{$c_name_first}.jpg"; // Append ".jpg" to the end
             ?>
             <div class="col" style="margin-top: 20px; margin-bottom: 20px;">
-                <a href="characterPage.php?name=<?php echo $characters['c_name']; ?>" class=no-underline>
+                <a href="characterPage.php?name=<?php echo urlencode($characters['c_name']); ?>" class=no-underline>
                     <img id="<?php echo $characters['c_name']; ?>" src="<?php echo $c_name_jpg; ?>"
                         alt="<?php echo $characters['c_name']; ?>" width="100">
                     <h6>
