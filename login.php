@@ -1,26 +1,37 @@
 <?php
+session_start();
+
 require("connect-db.php");
 require("db_functions.php");
 
-$username = isset($_POST['username']) ? $_POST['username'] : '';
-$password = isset($_POST['password']) ? $_POST['password'] : '';
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  echo $_POST['username'];
-  $space = "\n";
-  echo nl2br($space);
-  echo $_POST['userPassword'];
+  if (!empty($_POST['loginBtn'])) {
+    $usernameInputed = isset($_POST['username']) ? $_POST['username'] : '';
+    $passwordInputed = isset($_POST['userPassword']) ? $_POST['userPassword'] : '';
+    echo $usernameInputed;
+    $user = getUserByUsername($usernameInputed);
+    if ($user && password_verify($passwordInputed, $user['password'])) {
+      $_SESSION['username'] = $usernameInputed;
+      header("Location: profile.php");
+      exit;
+    } else {
+      // Invalid username or password
+      $_SESSION['login_error'] = "Invalid username or password";
+      header("Location: login.php?error=1");
+      exit;
+    }
+
+  }
 }
-?>
-
-<?php
-
-session_start();
 
 if (isset($_SESSION['signup_success']) && $_SESSION['signup_success']) {
   echo '<script>alert("Signup successful! Please log in.");</script>';
   unset($_SESSION['signup_success']);
 }
 ?>
+
+
 
 
 <!doctype html>
@@ -70,7 +81,14 @@ if (isset($_SESSION['signup_success']) && $_SESSION['signup_success']) {
 
 
 <body>
+  <?php if (isset($_GET['error']) && $_GET['error'] == 1): ?>
+    <div class="alert alert-danger text-center" role="alert">
+      Wrong username or password. Please try again.
+    </div>
+  <?php endif; ?>
   <br></br>
+
+
   <form name="mainForm" action="login.php" method="post">
     <div class="row mb-3 mx-3">
       <input type="text" class="form-control" name="username" required value="" placeholder="Username">
@@ -82,7 +100,7 @@ if (isset($_SESSION['signup_success']) && $_SESSION['signup_success']) {
     </div>
     <div class="row mb-3 mx-3">
       <div class="col-12 text-center">
-        <input type="submit" value="Login" name="addBtn" class="btn btn-primary" title="Login" />
+        <input type="submit" value="Login" name="loginBtn" class="btn btn-primary" title="Login" />
       </div>
     </div>
     <div class="row mb-3 mx-3">
