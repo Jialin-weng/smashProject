@@ -96,13 +96,14 @@ function getAllHighlights()
 function getAllMatches()
 {
     global $db;
-    $query = "SELECT FROM Arena AS a, Users AS u, Ruleset AS r WHERE username1 = username AND u.ruleset_id = r.ruleset_id;";
+    $query = "SELECT username1, username2, arena_code, friend_code, region, self_rating, character_name, r.hazards, r.smash_meter, r.objective, r.stage, r.items, r.time FROM Arena AS a, Users AS u, Ruleset AS r WHERE username1 = username AND u.ruleset_id = r.ruleset_id;";
     $statement = $db->prepare($query);
     $statement->execute();
     $results = $statement->fetchAll();
     $statement->closeCursor();
     return $results;
 }
+
 function signUp($username, $first_name, $last_name, $friend_code, $region, $self_rating, $character_name, $ruleset_id)
 {
     global $db;

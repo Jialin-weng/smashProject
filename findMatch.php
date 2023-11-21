@@ -56,7 +56,6 @@ $list_of_matches = getAllMatches();
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
         </script>
     
-    
     <div class="container mt-5 text-center"> 
         <h1>Find a Match</h1>
     
@@ -90,6 +89,31 @@ $list_of_matches = getAllMatches();
                         <td>
                             <?php echo $matches['arena_code']; ?>
                         </td>
+                        <td>
+                            <?php echo $matches['self_rating']; ?>
+                        </td>
+                        <td>
+                            <?php echo $matches['character_name']; ?>
+                        </td>
+                        <td>
+                            <?php echo $matches['hazards']; ?>
+                            <?php echo $matches['smash_meter']; ?>
+                            <?php echo $matches['objective']; ?>
+                            <?php echo $matches['stage']; ?>
+                            <?php echo $matches['items']; ?>
+                            <?php echo $matches['time']; ?>
+                        </td>
+                        <td>
+                            <a href="index.php" class=no-underline>
+                                <h6>
+                                    Join!
+                                </h6>
+                            </a>
+                        </td>
+                        <td>
+                        <?php echo $matches['arena_code']; ?>
+                        </td>
+
                     </tr>
                     <?php endforeach; ?>
 
