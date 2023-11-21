@@ -118,7 +118,7 @@ $list_of_matches = getAllMatches();
                     <?php endforeach; ?>
 
                     <div class="position-fixed bottom-0 end-1 p-3">
-                        <a href="characters.php" class="btn btn-primary">Can't find a suitable match? Create one!</a>
+                        <a href="createMatch.php" class="btn btn-primary">Can't find a suitable match? Create one!</a>
                     </div>
             </table>
 
