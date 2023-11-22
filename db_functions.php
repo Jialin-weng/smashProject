@@ -108,7 +108,7 @@ function getAllHighlights()
 function getAllMatches()
 {
     global $db;
-    $query = "select * from Arena";
+    $query = "SELECT username1, username2, arena_code, friend_code, region, self_rating, character_name, r.hazards, r.smash_meter, r.objective, r.stage, r.items, r.time FROM Arena AS a, Users AS u, Ruleset AS r WHERE username1 = username AND u.ruleset_id = r.ruleset_id;";
     $statement = $db->prepare($query);
     $statement->execute();
     $results = $statement->fetchAll();
@@ -133,6 +133,61 @@ function signUp($username, $first_name, $last_name, $friend_code, $region, $self
     $statement->closeCursor();
 }
 
+function create($arenacode, $username)
+{
+    global $db;
+    $dummy_user = "DUMMY_USER";
+    $query = "INSERT INTO Arena (username1, username2, arena_code) VALUES (:username1, :username2, :arena_code)";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':username1', $username);
+    $statement->bindValue(':username2', $dummy_user);
+    $statement->bindValue(':arena_code', $arenacode);
+    $statement->execute();
+    $statement->closeCursor();
+}
 
+function updateArena($username1, $username2)
+{
+    global $db;
+    $query = "UPDATE Arena SET username2 = :username2 WHERE username1 = :username1";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':username1', $username1);
+    $statement->bindValue(':username2', $username2);
+    $statement->execute();
+    $statement->closeCursor();
+}
 
+function isUserInMatch($username)
+{
+    global $db;
+    $query = "SELECT COUNT(*) AS count FROM `Arena` WHERE username1 = :username OR username2 = :username";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':username', $username);
+    $statement->execute();
+    $results = $statement->fetch();
+    $statement->closeCursor();
+    return $results;
+}
+
+function viewMatch($username)
+{
+    global $db;
+    $query = "SELECT username1, username2, arena_code, friend_code, region, self_rating, character_name, r.hazards, r.smash_meter, r.objective, r.stage, r.items, r.time FROM Arena AS a, Users AS u, Ruleset AS r WHERE (username1 = :username OR username2 = :username) AND username1 = u.username AND u.ruleset_id = r.ruleset_id;";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':username', $username);
+    $statement->execute();
+    $results = $statement->fetch(PDO::FETCH_ASSOC);
+    $statement->closeCursor();
+    return $results;
+}
+
+function deleteMatch($username)
+{
+    global $db;
+    $query = "DELETE FROM Arena WHERE username1=:username OR username2=:username";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':username', $username);
+    $statement->execute();
+    $statement->closeCursor();
+}
 ?>

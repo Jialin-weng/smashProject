@@ -63,7 +63,7 @@ $list_of_grabsOptions = getGrabOptionsByCharacterName($characterName);
     <div class="container mt-5 text-center">
 
         <h1>
-            <?php echo $characterName; ?>
+            <?php echo $characterName;?>
         </h1>
         <img src="<?php echo $c_name_jpg; ?>" alt="Friend's Image" width="200">
         <h2 class="text-center mt-4">List of Attacks</h2>

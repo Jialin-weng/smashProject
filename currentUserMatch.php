@@ -1,24 +1,33 @@
 <?php
 require("connect-db.php");
 require("db_functions.php");
-$list_of_characters = getAllCharacters();
+$list_of_matches = getAllMatches();
+session_start();
+if (!isset($_SESSION['username'])) {
+    echo "ERROR: need to login before seeing current match";
+    exit;
+} else {
+    $user = $_SESSION['username'];
+    $result = viewMatch($user);
+    if (!$result) {
+        echo "No match found for the user.";
+        exit;
+    }
+}
 ?>
 
 <!doctype html>
 <html lang="en">
 
 <head>
-    <style>
-        .no-underline {
-            text-decoration: none;
-        }
-    </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Smash</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
+
+
 <nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
     <div class="container-fluid">
         <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
@@ -58,29 +67,24 @@ $list_of_characters = getAllCharacters();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
         </script>
-</body>
-<div class="container text-center">
-    <h1>Characters</h1>
-    <div class="row row-cols-4">
-        <?php foreach ($list_of_characters as $characters): ?>
-            <?php
-            $c_name_first = $characters['c_name']; // Assuming $friend['c_name'] is your original string
-            $c_name_first = str_replace('.', '', $c_name_first); // Remove all periods
-            $c_name_first = str_replace('/', ':', $c_name_first);
-            $c_name_jpg = "images/{$c_name_first}.jpg"; // Append ".jpg" to the end
-            ?>
-            <div class="col" style="margin-top: 20px; margin-bottom: 20px;">
-                <a href="characterPage.php?name=<?php echo urlencode($characters['c_name']); ?>" class=no-underline>
-                    <img id="<?php echo $characters['c_name']; ?>" src="<?php echo $c_name_jpg; ?>"
-                        alt="<?php echo $characters['c_name']; ?>" width="100">
-                    <h6>
-                        <?php echo $characters['c_name']; ?>
-                    </h6>
-                </a>
-            </div>
-        <?php endforeach; ?>
-
+    
+    <div class="container mt-5 text-center"> 
+        <h1>Current Match</h1>
+        <?php $result = viewMatch($user); ?>
+        <h1><?php echo $result['username1']; ?> VS <?php 
+        
+        if ($result['username2'] == "DUMMY_USER") {
+            echo "Waiting for opponent...";
+        } else {
+            echo $result['username2'];
+        }
+             ?></h1>
+        <h1>Current User: <?php echo $user; ?></h1>
+        <div>
+            <a href="leaveMatch.php?u1=<?php echo $result['username1']; ?>&u2=<?php echo $result['username2'];?>" class="btn btn-primary">Leave Match?</a>
+        </div>         
     </div>
-</div>
+
+</body>
 
 </html>

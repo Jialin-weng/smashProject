@@ -2,6 +2,10 @@
 require("connect-db.php");
 require("db_functions.php");
 $list_of_matches = getAllMatches();
+session_start();
+if (isset($_SESSION['username'])) {
+  $user = getUserByUsername($_SESSION['username']);
+}
 ?>
 
 <!doctype html>
@@ -52,38 +56,102 @@ $list_of_matches = getAllMatches();
 
 
 <body>
-    <h1>findMatch</h1>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
         </script>
-    <div class="row row-cols-2">
-
-        <table class="table table-bordered table-striped mx-auto" style="width:70%">
-            <td>User 1</td>
-            <td>User 2</td>
-            <td>Arena Code</td>
-
-            <?php foreach ($list_of_matches as $matches): ?>
-                <tr class="friend-row">
-                    <td>
-                        <?php echo $matches['username1']; ?>
-                    </td>
-                    <td>
-                        <?php echo $matches['username2']; ?>
-                    </td>
-                    <td>
+    
+    <div class="container mt-5 text-center"> 
+        <h1>Find a Match</h1>
+    
+        <!-- need to add friend code, ruleset, character, level of play from User1 -->
+        <!-- query language:
+        username1, username2, arena_code, friend_code, region, self_rating, character_name, r.hazards, r.smash_meter, r.objective, r.stage, r.items, r.time
+-->
+        <!-- let User1 be the arena creator, and temporarily assign a "dummy" user to them. Let other users join this row. 
+            Once two legitimate users have joined a row, gray it out/make it non-joinable. Once, User1 leaves the arena, then we can delete the row from the database
+-->
+        <div class="row row-cols-2">
+            <table class="table table-bordered table-striped mx-auto" style="width:70%">
+                <th>User 1</th>
+                <th>Friend_code</th>
+                <th>Region</th>
+                <th>GSP</th>
+                <th>Character</th>
+                <th>Ruleset</th>
+                <th>User 2</th>
+                <th>Arena Code</th>
+                
+    
+                <?php foreach ($list_of_matches as $matches): ?>
+                    <tr class="friend-row">
+                        <td>
+                            <?php if ($matches['username1'] == $_SESSION['username']) {
+                                echo "<a href='currentUserMatch.php' class='btn btn-primary'>" . $matches['username1'] . "</a>";;
+                            } else {
+                                echo $matches['username1'];
+                            } ?>
+                            
+                        </td>
+                        <td>
+                            <?php echo $matches['friend_code']; ?>
+                        </td>
+                        <td>
+                            <?php echo $matches['arena_code']; ?>
+                        </td>
+                        <td>
+                            <?php echo $matches['self_rating']; ?>
+                        </td>
+                        <td>
+                            <?php echo $matches['character_name']; ?>
+                        </td>
+                        <td>
+                            <?php echo $matches['hazards']; ?>
+                            <?php echo $matches['smash_meter']; ?>
+                            <?php echo $matches['objective']; ?>
+                            <?php echo $matches['stage']; ?>
+                            <?php echo $matches['items']; ?>
+                            <?php echo $matches['time']; ?>
+                        </td>
+                        <td>
+                            <?php
+                                if ($matches['username2'] != "DUMMY_USER") {
+                                    if ($matches['username2'] == $_SESSION['username']) {
+                                        echo "<a href='currentUserMatch.php' class='btn btn-primary'>" . $matches['username2'] . "</a>";;
+                                    } else {
+                                        echo $matches['username2'];
+                                    }
+                                } elseif (isset($_SESSION['username'])) {
+                                        if ($matches['username1'] == $_SESSION['username'] ) {
+                                            echo "Your Match. Waiting for someone to join.";
+                                        } else {
+                                            echo "<a href='joinMatch.php?u1={$matches['username1']}' title='joinMatch' class='btn btn-primary'>Join!</a>";
+                                        }
+                                    }       
+                                    else {
+                                        echo "Login before Joining";
+                                    }
+                            ?>
+                            
+                        </td>
+                        <td>
                         <?php echo $matches['arena_code']; ?>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
+                        </td>
 
-            <div class="position-fixed bottom-0 end-1 p-3">
-                <a href="characters.php" class="btn btn-primary">Can't find a suitable match? Create one!</a>
-            </div>
-            <?php
-            ?>
-        </table>
+                    </tr>
+                    <?php endforeach; ?>
+            </table>
+            <div class="position-fixed bottom-0 text-center p-3">
+                        <?php
+                            if (!isset($_SESSION['username']) OR isUserInMatch($_SESSION['username'])['count'] > 0) {
+                                echo "<a href='createMatch.php' class='btn btn-primary disabled'>Can't find a suitable match? Create one!</a>";
+                                echo "<h6>Please login and leave current match, then you can create a match</h6>";
+                            } else {
+                                echo "<a href='createMatch.php' class='btn btn-primary'>Can't find a suitable match? Create one!</a>";
+                            }
+                        ?>
 
+            </div>                            
+        </div>
     </div>
 
 </body>
