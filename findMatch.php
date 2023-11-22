@@ -2,6 +2,10 @@
 require("connect-db.php");
 require("db_functions.php");
 $list_of_matches = getAllMatches();
+session_start();
+if (isset($_SESSION['username'])) {
+  $user = getUserByUsername($_SESSION['username']);
+}
 ?>
 
 <!doctype html>
@@ -104,11 +108,21 @@ $list_of_matches = getAllMatches();
                             <?php echo $matches['time']; ?>
                         </td>
                         <td>
-                            <a href="index.php" class=no-underline>
-                                <h6>
-                                    Join!
-                                </h6>
-                            </a>
+                            <?php
+                                if ($matches['username2'] != "DUMMY_USER") {
+                                        echo $matches['username2'];
+                                } elseif (isset($_SESSION['username'])) {
+                                        if ($matches['username1'] == $_SESSION['username'] ) {
+                                            echo "Your Match. Waiting for someone to join.";
+                                        } else {
+                                            echo "<a href='joinMatch.php?u1={$matches['username1']}' title='joinMatch' class='join'>Join!</a>";
+                                        }
+                                    }       
+                                    else {
+                                        echo "Login before Joining";
+                                    }
+                            ?>
+                            
                         </td>
                         <td>
                         <?php echo $matches['arena_code']; ?>
@@ -118,7 +132,7 @@ $list_of_matches = getAllMatches();
                     <?php endforeach; ?>
 
                     <div class="position-fixed bottom-0 end-1 p-3">
-                        <a href="createMatch.php" class="btn btn-primary">Can't find a suitable match? Create one!</a>
+                        <a href="createMatch.php" class="btn btn-primary disabled">Can't find a suitable match? Create one!</a>
                     </div>
             </table>
 

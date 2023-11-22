@@ -146,6 +146,14 @@ function create($arenacode, $username)
     $statement->closeCursor();
 }
 
-
-
+function updateArena($username1, $username2)
+{
+    global $db;
+    $query = "UPDATE Arena SET username2 = :username2 WHERE username1 = :username1";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':username1', $username1);
+    $statement->bindValue(':username2', $username2);
+    $statement->execute();
+    $statement->closeCursor();
+}
 ?>

@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
     <!-- username PRIMARY KEY-->
     <div class="form-floating row mb-3 mx-3">
-      <input id="username_id" type="text" class="form-control" name="username" value=<?php echo $user['username'] ?>>
+      <input id="username_id" type="text" class="form-control" name="username" value=<?php echo $user['username'] ?> disabled>
       <label for="username_id">Username</label>
     </div>
     
