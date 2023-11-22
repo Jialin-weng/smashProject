@@ -84,7 +84,7 @@ $list_of_matches = getAllMatches();
                             <?php echo $matches['username1']; ?>
                         </td>
                         <td>
-                            <?php echo $matches['username2']; ?>
+                            <?php echo $matches['friend_code']; ?>
                         </td>
                         <td>
                             <?php echo $matches['arena_code']; ?>

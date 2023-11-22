@@ -1,13 +1,15 @@
 <?php
 require("connect-db.php");
 require("db_functions.php");
+session_start();
+if (isset($_SESSION['username'])) {
+  $user = getUserByUsername($_SESSION['username']);
+}
 $list_of_characters = getAllCharacters();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  if (!empty($_POST['signupButton'])) {
-    signUp($_POST['username'], $_POST['firstName'], $_POST['lastName'], $_POST['friendCode'], $_POST['region'], $_POST['selfrating'], $_POST['character'], $_POST['ruleset_id']);
-    session_start();
-    $_SESSION['signup_success'] = true;
-    header("Location: login.php");
+  if (!empty($_POST['createButton'])) {
+    create($_POST['arenacode'], $_POST['username']);
+    header("Location: findMatch.php");
     exit;
   }
 }
@@ -61,7 +63,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <body>
   <div class="text-center">
-    <h1>Sign Up</h1>
+    <h1>Create Match</h1>
+    (Pre-filled based on User Profile), change if necessary
+    <div></div>
+    *** Haven't implemented functionality when changed yet ***
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
@@ -69,99 +74,93 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   <!-- FIELDS: -->
 
-  <form name="mainForm" action="signUp.php" method="post">
+  <form name="mainForm" action="createMatch.php" method="post">
+    <div class="form-floating row mb-3 mx-3">
+      <input id="arena_id" type="text" class="form-control" name="arenacode" value=<?php echo $user['arena_code'] ?>>
+      <label for="arena_id">Arena Code</label>
+    </div>
     <!-- username PRIMARY KEY-->
     <div class="form-floating row mb-3 mx-3">
-      <input id="username" type="text" class="form-control" name="username" required value=""
-        placeholder="Username: must be specific">
-      <label for="floatingInput">Username</label>
+      <input id="username_id" type="text" class="form-control" name="username" value=<?php echo $user['username'] ?>>
+      <label for="username_id">Username</label>
     </div>
+    
     <!-- password NOT INCLUDED YET IN DB -->
     <div class="form-floating row mb-3 mx-3">
-      <input id="password" type="password" name="userPassword" class="form-control" aria-describedby="passwordHelpBlock"
-        required value="" placeholder="Password">
-      <label for="password">Password</label>
+      <input id="friendcode_id" type="text" name="friendcode" class="form-control" value=<?php echo $user['friend_code'] ?> placeholder="Friend Code">
+      <label for="friendcode_id">Friend Code</label>
     </div>
-    <!-- first_name -->
-    <div class="form-floating mb-3 mx-3">
-      <input id="firstName" type="text" name="firstName" class="form-control" required value=""
-        placeholder="First Name">
-      <label for="firstName">First Name</label>
-    </div>
-    <!-- last_name -->
-    <div class="form-floating mb-3 mx-3">
-      <input id="lastName" type="text" name="lastName" class="form-control" required value="" placeholder="Last Name">
-      <label for="lastName">Last Name</label>
-    </div>
-    <!-- friend_code -->
-    <div class="form-floating mb-3 mx-3">
-      <input id="friendCode" type="text" name="friendCode" class="form-control" required value=""
-        placeholder="Friend Code">
-      <label for="friendCode">Friend Code</label>
-    </div>
-    <!-- self_rating -->
-    <div class="form-floating row mb-3 mx-3">
-      <input type="text" name="selfrating" class="form-control" placeholder="Self Rating" required value="">
-      <label for="selfrating">GSP</label>
-    </div>
-    <!-- region -->
-    <div class="mb-3 mx-3">
-      <select name="region" class="form-select" aria-label="Default select example">
-        <option selected>Region</option>
-        <option value="Baja California">Baja California</option>
-        <option value="Bolivia">Bolivia</option>
-        <option value="Central Mexico">Central Mexico</option>
-        <option value="Chubu">Chubu</option>
-        <option value="Chugoku">Chugoku</option>
-        <option value="Florida">Florida</option>
-        <option value="Georgia">Georgia</option>
-        <option value="Hokkaido">Hokkaido</option>
-        <option value="Hokuriku">Hokuriku</option>
-        <option value="Japan">Japan</option>
-        <option value="Kansai">Kansai</option>
-        <option value="Kanto">Kanto</option>
-        <option value="Kyushu">Kyushu</option>
-        <option value="Maryland-Virginia">Maryland-Virginia</option>
-        <option value="Michigan">Michigan</option>
-        <option value="Netheerlands">Netheerlands</option>
-        <option value="New England">New England</option>
-        <option value="Northern California">Northern California</option>
-        <option value="Okinawa">Okinawa</option>
-        <option value="Pacific Northwest">Pacific Northwest</option>
-        <option value="Shikoku">Shikoku</option>
-        <option value="South Korea">South Korea</option>
-        <option value="Soutern California">Soutern California</option>
-        <option value="Southwest">Southwest</option>
-        <option value="Texas">Texas</option>
-        <option value="Tristate Area">Tristate Area</option>
-        <option value="Tohoku">Tohoku</option>
-        <option value="United Kingdom and Ireland">United Kingdom and Ireland</option>
-
+    <div class="mb-3 mx-3 form-floating">
+      <select name="region" class="form-select" id="region_id">
+        <optgroup label="From Profile">
+          <option selected><?php echo $user['region'] ?></option>  
+        </optgroup>
+        <optgroup label="General">
+          <option value="Baja California">Baja California</option>
+          <option value="Bolivia">Bolivia</option>
+          <option value="Central Mexico">Central Mexico</option>
+          <option value="Chubu">Chubu</option>
+          <option value="Chugoku">Chugoku</option>
+          <option value="Florida">Florida</option>
+          <option value="Georgia">Georgia</option>
+          <option value="Hokkaido">Hokkaido</option>
+          <option value="Hokuriku">Hokuriku</option>
+          <option value="Japan">Japan</option>
+          <option value="Kansai">Kansai</option>
+          <option value="Kanto">Kanto</option>
+          <option value="Kyushu">Kyushu</option>
+          <option value="Maryland-Virginia">Maryland-Virginia</option>
+          <option value="Michigan">Michigan</option>
+          <option value="Netheerlands">Netheerlands</option>
+          <option value="New England">New England</option>
+          <option value="Northern California">Northern California</option>
+          <option value="Okinawa">Okinawa</option>
+          <option value="Pacific Northwest">Pacific Northwest</option>
+          <option value="Shikoku">Shikoku</option>
+          <option value="South Korea">South Korea</option>
+          <option value="Soutern California">Soutern California</option>
+          <option value="Southwest">Southwest</option>
+          <option value="Texas">Texas</option>
+          <option value="Tristate Area">Tristate Area</option>
+          <option value="Tohoku">Tohoku</option>
+          <option value="United Kingdom and Ireland">United Kingdom and Ireland</option>
+        </optgroup>
       </select>
+      <label for="region_id">Region</label>
+    </div>
+
+    <div class="form-floating row mb-3 mx-3">
+      <input type="text" name="gsp" class="form-control" placeholder="Self Rating" value=<?php echo $user['self_rating']?>>
+      <label for="gsp">GSP</label>
     </div>
 
     <!-- character_name -->
-    <div class="row mb-3 mx-3">
-      <select name="character" class="form-select" aria-label="Default select example">
-        <option value="Default">Main</option>
-        <?php foreach ($list_of_characters as $characters): ?>
-          <?php $c_name_first = $characters['c_name']; ?>
-          <option value="<?php echo $characters['c_name']; ?>">
-            <?php echo $characters['c_name']; ?>
-          </option>
-        <?php endforeach; ?>
+    <div class="form-floating row mb-3 mx-3">
+      <select id="character_id" name="character" class="form-select">
+        <optgroup label="From Profile">
+          <option selected><?php echo $user['character_name']?></option>
+        </optgroup>
+        <optgroup label="General">
+          <?php foreach ($list_of_characters as $characters): ?>
+            <?php $c_name_first = $characters['c_name']; ?>
+            <option value="<?php echo $characters['c_name']; ?>">
+              <?php echo $characters['c_name']; ?>
+            </option>
+          <?php endforeach; ?>
+        </optgroup>
       </select>
+      <label for="character_id">Character</label>
     </div>
 
     <!-- ruleset_id -->
     <div class="form-floating row mb-3 mx-3">
-      <input type="text" name="ruleset_id" class="form-control" placeholder="Ruleset" required value="">
+      <input type="text" name="ruleset_id" class="form-control" placeholder="Ruleset" value=<?php echo $user['ruleset_id']?>>
       <label for="ruleset_id">Rule Set</label>
     </div>
 
     <div class="row mb-3 mx-3">
       <div class="col-12 text-center">
-        <input type="submit" value="Create" name="signupButton" class="btn btn-primary"
+        <input type="submit" value="Create" name="createButton" class="btn btn-primary"
           title="Create!" />
       </div>
     </div>

@@ -1,4 +1,4 @@
- -- Create Banjo & Kazooie's moves
+  -- Create Banjo & Kazooie's moves
 INSERT INTO `Move` (`move_name`, `c_name`) VALUES
     ('Banjo & Kazooie Air Dodge', 'Banjo & Kazooie'),
     ('Banjo & Kazooie Back Aerial', 'Banjo & Kazooie'),
@@ -2098,8 +2098,8 @@ INSERT INTO `Move` (`move_name`, `c_name`) VALUES
     ('Kazuya Up Smash', 'Kazuya'),
     ('Kazuya Up Special', 'Kazuya'),
     ('Kazuya Up Throw', 'Kazuya'),
-    ('Kazuya Up Tilt', 'Kazuya');
-    ('Kazuya Up Forward Tilt', 'Kazuya');
+    ('Kazuya Up Tilt', 'Kazuya'),
+    ('Kazuya Up Forward Tilt', 'Kazuya'),
     ('Kazuya Up Back Tilt', 'Kazuya');
 -- Insert Kazuya's ground attacks
 INSERT INTO `Attack` (`move_name`, `shield_stun`, `start_up_frames`, `end_lag`, `damage`, `c_name`) VALUES
@@ -3433,10 +3433,10 @@ INSERT INTO `Dodges` (`move_name`, `total_frame`, `intangible_frame`, `c_name`) 
     ('Mii Swordfighter Spot Dodge', 20, 15, 'Mii Swordfighter'),
     ('Mii Swordfighter Forward Roll', 29, 12, 'Mii Swordfighter'),
     ('Mii Swordfighter Back Roll', 34, 12, 'Mii Swordfighter'),
-    ('Mii Swordfighter Air Dodge', 50, 28, 'Mii Swordfighter');
+    ('Mii Swordfighter Air Dodge', 50, 28, 'Mii Swordfighter'); 
 
 
--- Create Min Min's moves
+ -- Create Min Min's moves
 INSERT INTO `Move` (`move_name`, `c_name`) VALUES
     ('Min Min Air Dodge', 'Min Min'),
     ('Min Min Back Roll', 'Min Min'),
@@ -3977,10 +3977,10 @@ INSERT INTO `Dodges` (`move_name`, `total_frame`, `intangible_frame`, `c_name`) 
     ('Peach Spot Dodge', 21, 15, 'Peach'),
     ('Peach Forward Roll', 30, 12, 'Peach'),
     ('Peach Back Roll', 35, 12, 'Peach'),
-    ('Peach Air Dodge', 61, 28, 'Peach');
+    ('Peach Air Dodge', 61, 28, 'Peach'); 
 
 
--- Create Pichu's moves
+ -- Create Pichu's moves
 INSERT INTO `Move` (`move_name`, `c_name`) VALUES
     ('Pichu Air Dodge', 'Pichu'),
     ('Pichu Back Aerial', 'Pichu'),
@@ -4253,8 +4253,75 @@ INSERT INTO `Dodges` (`move_name`, `total_frame`, `intangible_frame`, `c_name`) 
     ('Pit Air Dodge', 52, 27, 'Pit'),
     ('Pit Back Roll', 34, 12, 'Pit'),
     ('Pit Forward Roll', 29, 12, 'Pit'),
-    ('Pit Spot Dodge', 20, 15, 'Pit');
+    ('Pit Spot Dodge', 20, 15, 'Pit'); 
 
+ -- Create Mythra's moves
+INSERT INTO `Move` (`move_name`, `c_name`) VALUES
+    ('Mythra Air Dodge', 'Mythra'),
+    ('Mythra Back Aerial', 'Mythra'),
+    ('Mythra Back Roll', 'Mythra'),
+    ('Mythra Back Throw', 'Mythra'),
+    ('Mythra Dash Attack', 'Mythra'),
+    ('Mythra Down Aerial', 'Mythra'),
+    ('Mythra Down Smash', 'Mythra'),
+    ('Mythra Down Special', 'Mythra'),
+    ('Mythra Down Throw', 'Mythra'),
+    ('Mythra Down Tilt', 'Mythra'),
+    ('Mythra Forward Aerial', 'Mythra'),
+    ('Mythra Forward Roll', 'Mythra'),
+    ('Mythra Forward Smash', 'Mythra'),
+    ('Mythra Forward Throw', 'Mythra'),
+    ('Mythra Forward Tilt', 'Mythra'),
+    ('Mythra Grab', 'Mythra'),
+    ('Mythra Jab', 'Mythra'),
+    ('Mythra Neutral Aerial', 'Mythra'),
+    ('Mythra Pummel', 'Mythra'),
+    ('Mythra Side Special', 'Mythra'),
+    ('Mythra Special', 'Mythra'),
+    ('Mythra Spot Dodge', 'Mythra'),
+    ('Mythra Up Aerial', 'Mythra'),
+    ('Mythra Up Smash', 'Mythra'),
+    ('Mythra Up Special', 'Mythra'),
+    ('Mythra Up Throw', 'Mythra'),
+    ('Mythra Up Tilt', 'Mythra');
+-- Insert Mythra's ground attacks
+INSERT INTO `Attack` (`move_name`, `shield_stun`, `start_up_frames`, `end_lag`, `damage`, `c_name`) VALUES
+    ('Mythra Jab', 3.00, 2, 16, 2.00, 'Mythra'),
+    ('Mythra Forward Tilt', 6.00, 8, 16, 5.50, 'Mythra'),
+    ('Mythra Up Tilt', 5.00, 7, 14, 4.00, 'Mythra'),
+    ('Mythra Down Tilt', 4.00, 5, 13, 3.00, 'Mythra'),
+    ('Mythra Dash Attack', 0.00, 9, 29, 7.00, 'Mythra'),
+    ('Mythra Forward Smash', 9.00, 14, 32, 13.50, 'Mythra'),
+    ('Mythra Up Smash', 3.00, 9, 25, 2.00, 'Mythra'),
+    ('Mythra Down Smash', 0.00, 8, 28, 9.00, 'Mythra');
+-- Insert Mythra's aerial attacks
+INSERT INTO `Aerial` (`move_name`, `shield_stun`, `start_up_frames`, `end_lag`, `damage`, `landing_lag`, `c_name`) VALUES
+    ('Mythra Neutral Aerial', 3.00, 8, 31, 2.00, 13, 'Mythra'),
+    ('Mythra Forward Aerial', 3.00, 8, 26, 7.00, 10, 'Mythra'),
+    ('Mythra Back Aerial', 3.00, 10, 21, 7.50, 10, 'Mythra'),
+    ('Mythra Up Aerial', 3.00, 9, 17, 6.00, 8, 'Mythra'),
+    ('Mythra Down Aerial', 4.00, 13, 24, 8.00, 11, 'Mythra');
+-- Insert Mythra's special attacks
+INSERT INTO `Attack` (`move_name`, `shield_stun`, `start_up_frames`, `end_lag`, `damage`, `c_name`) VALUES
+    ('Mythra Special', 5.00, 9, 0, 2.00, 'Mythra'),
+    ('Mythra Side Special', 4.00, 18, 46, 2.50, 'Mythra'),
+    ('Mythra Up Special', 7.00, 10, 0, 7.00, 'Mythra'),
+    ('Mythra Down Special', 0.00, 0, 0, 0.00, 'Mythra');
+-- Insert Mythra's grab and grab options
+INSERT INTO `Grab` (`move_name`, `start_up_frames`, `end_frames`, `c_name`) VALUES
+    ('Mythra Grab', 6, 29, 'Mythra');
+INSERT INTO `GrabOption` (`move_name`, `damage`, `total_frame`, `c_name`) VALUES
+    ('Mythra Pummel', 1.50, 19, 'Mythra'),
+    ('Mythra Forward Throw', 3.00, 27, 'Mythra'),
+    ('Mythra Back Throw', 3.00, 35, 'Mythra'),
+    ('Mythra Up Throw', 4.00, 29, 'Mythra'),
+    ('Mythra Down Throw', 4.00, 48, 'Mythra');
+-- Insert Mythra's dodges
+INSERT INTO `Dodges` (`move_name`, `total_frame`, `intangible_frame`, `c_name`) VALUES
+    ('Mythra Spot Dodge', 25, 15, 'Mythra'),
+    ('Mythra Forward Roll', 35, 12, 'Mythra'),
+    ('Mythra Back Roll', 38, 12, 'Mythra'),
+    ('Mythra Air Dodge', 44, 28, 'Mythra');
 
 -- Create Pyra's moves
 INSERT INTO `Move` (`move_name`, `c_name`) VALUES
@@ -4391,10 +4458,10 @@ INSERT INTO `Dodges` (`move_name`, `total_frame`, `intangible_frame`, `c_name`) 
     ('Richter Spot Dodge', 21, 15, 'Richter'),
     ('Richter Forward Roll', 30, 12, 'Richter'),
     ('Richter Back Roll', 35, 12, 'Richter'),
-    ('Richter Air Dodge', 46, 27, 'Richter');
+    ('Richter Air Dodge', 46, 27, 'Richter'); 
 
 
--- Create Ridley's moves
+ -- Create Ridley's moves
 INSERT INTO `Move` (`move_name`, `c_name`) VALUES
     ('Ridley Air Dodge', 'Ridley'),
     ('Ridley Back Aerial', 'Ridley'),
@@ -4737,7 +4804,7 @@ INSERT INTO `Dodges` (`move_name`, `total_frame`, `intangible_frame`, `c_name`) 
     ('Roy Forward Roll', 29, 12, 'Roy'),
     ('Roy Back Roll', 34, 12, 'Roy'),
     ('Roy Air Dodge', 44, 27, 'Roy');
-
+ 
 
 -- Create Ryu's moves
 INSERT INTO `Move` (`move_name`, `c_name`) VALUES

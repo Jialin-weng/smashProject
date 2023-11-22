@@ -133,6 +133,19 @@ function signUp($username, $first_name, $last_name, $friend_code, $region, $self
     $statement->closeCursor();
 }
 
+function create($arenacode, $username)
+{
+    global $db;
+    $dummy_user = "DUMMY_USER";
+    $query = "insert into Arena values (:username1, :username2, :arena_code)";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':username1', $username);
+    $statement->bindValue(':username2', $dummy_user);
+    $statement->bindValue(':arena_code', $arenacode);
+    $statement->execute();
+    $statement->closeCursor();
+}
+
 
 
 ?>
