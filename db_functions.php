@@ -180,4 +180,14 @@ function viewMatch($username)
     $statement->closeCursor();
     return $results;
 }
+
+function deleteMatch($username)
+{
+    global $db;
+    $query = "DELETE FROM Arena WHERE username1=:username OR username2=:username";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':username', $username);
+    $statement->execute();
+    $statement->closeCursor();
+}
 ?>

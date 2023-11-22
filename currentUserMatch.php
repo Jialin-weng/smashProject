@@ -71,10 +71,17 @@ if (!isset($_SESSION['username'])) {
     <div class="container mt-5 text-center"> 
         <h1>Current Match</h1>
         <?php $result = viewMatch($user); ?>
-        <h1><?php echo $result['username1']; ?> VS <?php echo $result['username2']; ?></h1>
+        <h1><?php echo $result['username1']; ?> VS <?php 
+        
+        if ($result['username2'] == "DUMMY_USER") {
+            echo "Waiting for opponent...";
+        } else {
+            echo $result['username2'];
+        }
+             ?></h1>
         <h1>Current User: <?php echo $user; ?></h1>
         <div>
-            <a href="" class="btn btn-primary">Leave Match?</a>
+            <a href="leaveMatch.php?u1=<?php echo $result['username1']; ?>&u2=<?php echo $result['username2'];?>" class="btn btn-primary">Leave Match?</a>
         </div>         
     </div>
 

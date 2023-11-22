@@ -124,7 +124,7 @@ if (isset($_SESSION['username'])) {
                                         if ($matches['username1'] == $_SESSION['username'] ) {
                                             echo "Your Match. Waiting for someone to join.";
                                         } else {
-                                            echo "<a href='joinMatch.php?u1={$matches['username1']}' title='joinMatch' class='join'>Join!</a>";
+                                            echo "<a href='joinMatch.php?u1={$matches['username1']}' title='joinMatch' class='btn btn-primary'>Join!</a>";
                                         }
                                     }       
                                     else {
