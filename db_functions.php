@@ -168,4 +168,16 @@ function isUserInMatch($username)
     $statement->closeCursor();
     return $results;
 }
+
+function viewMatch($username)
+{
+    global $db;
+    $query = "SELECT username1, username2, arena_code, friend_code, region, self_rating, character_name, r.hazards, r.smash_meter, r.objective, r.stage, r.items, r.time FROM Arena AS a, Users AS u, Ruleset AS r WHERE (username1 = :username OR username2 = :username) AND username1 = u.username AND u.ruleset_id = r.ruleset_id;";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':username', $username);
+    $statement->execute();
+    $results = $statement->fetch(PDO::FETCH_ASSOC);
+    $statement->closeCursor();
+    return $results;
+}
 ?>

@@ -85,7 +85,12 @@ if (isset($_SESSION['username'])) {
                 <?php foreach ($list_of_matches as $matches): ?>
                     <tr class="friend-row">
                         <td>
-                            <?php echo $matches['username1']; ?>
+                            <?php if ($matches['username1'] == $_SESSION['username']) {
+                                echo "<a href='currentUserMatch.php' class='btn btn-primary'>" . $matches['username1'] . "</a>";;
+                            } else {
+                                echo $matches['username1'];
+                            } ?>
+                            
                         </td>
                         <td>
                             <?php echo $matches['friend_code']; ?>
@@ -110,7 +115,11 @@ if (isset($_SESSION['username'])) {
                         <td>
                             <?php
                                 if ($matches['username2'] != "DUMMY_USER") {
+                                    if ($matches['username2'] == $_SESSION['username']) {
+                                        echo "<a href='currentUserMatch.php' class='btn btn-primary'>" . $matches['username2'] . "</a>";;
+                                    } else {
                                         echo $matches['username2'];
+                                    }
                                 } elseif (isset($_SESSION['username'])) {
                                         if ($matches['username1'] == $_SESSION['username'] ) {
                                             echo "Your Match. Waiting for someone to join.";
