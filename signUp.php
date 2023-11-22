@@ -2,11 +2,11 @@
 require("connect-db.php");
 require("db_functions.php");
 $list_of_characters = getAllCharacters();
+session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (!empty($_POST['signupButton'])) {
     $hashedPassword = password_hash($_POST['userPassword'], PASSWORD_DEFAULT);
     signUp($_POST['username'], $_POST['firstName'], $_POST['lastName'], $_POST['friendCode'], $_POST['region'], $_POST['selfrating'], $_POST['character'], $_POST['ruleset_id'], $hashedPassword);
-    session_start();
     $_SESSION['signup_success'] = true;
     header("Location: login.php");
     exit;
@@ -48,12 +48,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="index.php">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="login.php">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="profile.php">Profile</a>
-        </li>
+        <?php
+        if (!isset($_SESSION['username'])) {
+          echo '<li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>';
+        } else {
+          echo '<li class="nav-item"><a class="nav-link" href="profile.php">Profile</a></li>';
+        }
+
+        ?>
+
       </ul>
     </div>
   </div>

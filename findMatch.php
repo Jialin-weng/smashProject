@@ -4,7 +4,7 @@ require("db_functions.php");
 $list_of_matches = getAllMatches();
 session_start();
 if (isset($_SESSION['username'])) {
-  $user = getUserByUsername($_SESSION['username']);
+    $user = getUserByUsername($_SESSION['username']);
 }
 ?>
 
@@ -43,12 +43,13 @@ if (isset($_SESSION['username'])) {
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="login.php">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="profile.php">Profile</a>
-                </li>
+                <?php
+                if (!isset($_SESSION['username'])) {
+                    echo '<li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>';
+                } else {
+                    echo '<li class="nav-item"><a class="nav-link" href="profile.php">Profile</a></li>';
+                }
+                ?>
             </ul>
         </div>
     </div>
@@ -59,10 +60,10 @@ if (isset($_SESSION['username'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
         </script>
-    
-    <div class="container mt-5 text-center"> 
+
+    <div class="container mt-5 text-center">
         <h1>Find a Match</h1>
-    
+
         <!-- need to add friend code, ruleset, character, level of play from User1 -->
         <!-- query language:
         username1, username2, arena_code, friend_code, region, self_rating, character_name, r.hazards, r.smash_meter, r.objective, r.stage, r.items, r.time
@@ -80,17 +81,18 @@ if (isset($_SESSION['username'])) {
                 <th>Ruleset</th>
                 <th>User 2</th>
                 <th>Arena Code</th>
-                
-    
+
+
                 <?php foreach ($list_of_matches as $matches): ?>
                     <tr class="friend-row">
                         <td>
                             <?php if ($matches['username1'] == $_SESSION['username']) {
-                                echo "<a href='currentUserMatch.php' class='btn btn-primary'>" . $matches['username1'] . "</a>";;
+                                echo "<a href='currentUserMatch.php' class='btn btn-primary'>" . $matches['username1'] . "</a>";
+                                ;
                             } else {
                                 echo $matches['username1'];
                             } ?>
-                            
+
                         </td>
                         <td>
                             <?php echo $matches['friend_code']; ?>
@@ -114,43 +116,43 @@ if (isset($_SESSION['username'])) {
                         </td>
                         <td>
                             <?php
-                                if ($matches['username2'] != "DUMMY_USER") {
-                                    if ($matches['username2'] == $_SESSION['username']) {
-                                        echo "<a href='currentUserMatch.php' class='btn btn-primary'>" . $matches['username2'] . "</a>";;
-                                    } else {
-                                        echo $matches['username2'];
-                                    }
-                                } elseif (isset($_SESSION['username'])) {
-                                        if ($matches['username1'] == $_SESSION['username'] ) {
-                                            echo "Your Match. Waiting for someone to join.";
-                                        } else {
-                                            echo "<a href='joinMatch.php?u1={$matches['username1']}' title='joinMatch' class='btn btn-primary'>Join!</a>";
-                                        }
-                                    }       
-                                    else {
-                                        echo "Login before Joining";
-                                    }
+                            if ($matches['username2'] != "DUMMY_USER") {
+                                if ($matches['username2'] == $_SESSION['username']) {
+                                    echo "<a href='currentUserMatch.php' class='btn btn-primary'>" . $matches['username2'] . "</a>";
+                                    ;
+                                } else {
+                                    echo $matches['username2'];
+                                }
+                            } elseif (isset($_SESSION['username'])) {
+                                if ($matches['username1'] == $_SESSION['username']) {
+                                    echo "Your Match. Waiting for someone to join.";
+                                } else {
+                                    echo "<a href='joinMatch.php?u1={$matches['username1']}' title='joinMatch' class='btn btn-primary'>Join!</a>";
+                                }
+                            } else {
+                                echo "Login before Joining";
+                            }
                             ?>
-                            
+
                         </td>
                         <td>
-                        <?php echo $matches['arena_code']; ?>
+                            <?php echo $matches['arena_code']; ?>
                         </td>
 
                     </tr>
-                    <?php endforeach; ?>
+                <?php endforeach; ?>
             </table>
             <div class="position-fixed bottom-0 text-center p-3">
-                        <?php
-                            if (!isset($_SESSION['username']) OR isUserInMatch($_SESSION['username'])['count'] > 0) {
-                                echo "<a href='createMatch.php' class='btn btn-primary disabled'>Can't find a suitable match? Create one!</a>";
-                                echo "<h6>Please login and leave current match, then you can create a match</h6>";
-                            } else {
-                                echo "<a href='createMatch.php' class='btn btn-primary'>Can't find a suitable match? Create one!</a>";
-                            }
-                        ?>
+                <?php
+                if (!isset($_SESSION['username']) or isUserInMatch($_SESSION['username'])['count'] > 0) {
+                    echo "<a href='createMatch.php' class='btn btn-primary disabled'>Can't find a suitable match? Create one!</a>";
+                    echo "<h6>Please login and leave current match, then you can create a match</h6>";
+                } else {
+                    echo "<a href='createMatch.php' class='btn btn-primary'>Can't find a suitable match? Create one!</a>";
+                }
+                ?>
 
-            </div>                            
+            </div>
         </div>
     </div>
 
