@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -6,22 +10,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Smash</title>
     <style>
-    body {
-        background-image: url('images/Smash_Ball.svg.png');
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }
+        body {
+            background-image: url('images/Smash_Ball.svg.png');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
 
-    .centered-text {
-        text-align: center;
-        position: absolute;
-        top: 40%;
-        left: 60%;
-        transform: translate(-50%, -50%);
-        color: white;
-        font-family: "Times New Roman", serif;
-    }
+        .centered-text {
+            text-align: center;
+            position: absolute;
+            top: 40%;
+            left: 60%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-family: "Times New Roman", serif;
+        }
     </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -45,7 +49,6 @@
                                     class="bi bi-person-arms-up"></i>
                             </a></li>
                         <li><a class="dropdown-item" href="findMatch.php">Find Match</a></li>
-                        <!-- <li><hr class="dropdown-divider"></li> -->
                         <li><a class="dropdown-item" href="highlights.php">Highlights</a></li>
                         <li><a class="dropdown-item" href="leaderboard.php">Leaderboard</a></li>
 
@@ -56,12 +59,13 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="login.php">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="profile.php">Profile</a>
-                </li>
+                <?php
+                if (!isset($_SESSION['username'])) {
+                    echo '<li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>';
+                } else {
+                    echo '<li class="nav-item"><a class="nav-link" href="profile.php">Profile</a></li>';
+                }
+                ?>
             </ul>
         </div>
     </div>
@@ -73,7 +77,7 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://unpkg.com/page/page.js"></script>
 </body>
 

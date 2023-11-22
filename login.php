@@ -68,12 +68,13 @@ if (isset($_SESSION['signup_success']) && $_SESSION['signup_success']) {
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="index.php">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="login.php">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="profile.php">Profile</a>
-        </li>
+        <?php
+        if (!isset($_SESSION['username'])) {
+          echo '<li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>';
+        } else {
+          echo '<li class="nav-item"><a class="nav-link" href="profile.php">Profile</a></li>';
+        }
+        ?>
       </ul>
     </div>
   </div>

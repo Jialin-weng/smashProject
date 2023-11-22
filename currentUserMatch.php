@@ -51,12 +51,13 @@ if (!isset($_SESSION['username'])) {
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="login.php">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="profile.php">Profile</a>
-                </li>
+                <?php
+                if (!isset($_SESSION['username'])) {
+                    echo '<li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>';
+                } else {
+                    echo '<li class="nav-item"><a class="nav-link" href="profile.php">Profile</a></li>';
+                }
+                ?>
             </ul>
         </div>
     </div>
@@ -67,22 +68,28 @@ if (!isset($_SESSION['username'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
         </script>
-    
-    <div class="container mt-5 text-center"> 
+
+    <div class="container mt-5 text-center">
         <h1>Current Match</h1>
         <?php $result = viewMatch($user); ?>
-        <h1><?php echo $result['username1']; ?> VS <?php 
-        
-        if ($result['username2'] == "DUMMY_USER") {
-            echo "Waiting for opponent...";
-        } else {
-            echo $result['username2'];
-        }
-             ?></h1>
-        <h1>Current User: <?php echo $user; ?></h1>
+        <h1>
+            <?php echo $result['username1']; ?> VS
+            <?php
+
+            if ($result['username2'] == "DUMMY_USER") {
+                echo "Waiting for opponent...";
+            } else {
+                echo $result['username2'];
+            }
+            ?>
+        </h1>
+        <h1>Current User:
+            <?php echo $user; ?>
+        </h1>
         <div>
-            <a href="leaveMatch.php?u1=<?php echo $result['username1']; ?>&u2=<?php echo $result['username2'];?>" class="btn btn-primary">Leave Match?</a>
-        </div>         
+            <a href="leaveMatch.php?u1=<?php echo $result['username1']; ?>&u2=<?php echo $result['username2']; ?>"
+                class="btn btn-primary">Leave Match?</a>
+        </div>
     </div>
 
 </body>

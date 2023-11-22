@@ -49,12 +49,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="index.php">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="login.php">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="profile.php">Profile</a>
-        </li>
+        <?php
+        if (!isset($_SESSION['username'])) {
+          echo '<li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>';
+        } else {
+          echo '<li class="nav-item"><a class="nav-link" href="profile.php">Profile</a></li>';
+        }
+        ?>
       </ul>
     </div>
   </div>
@@ -81,10 +82,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
     <!-- username PRIMARY KEY-->
     <div class="form-floating row mb-3 mx-3">
-      <input id="username_id" type="text" class="form-control" name="username" value=<?php echo $user['username']?> disabled>
+      <input id="username_id" type="text" class="form-control" name="username" value=<?php echo $user['username'] ?>
+        disabled>
       <label for="username_id">Username</label>
     </div>
-    
+
     <div class="form-floating row mb-3 mx-3">
       <input id="friendcode_id" type="text" name="friendcode" class="form-control" value=<?php echo $user['friend_code'] ?> placeholder="Friend Code">
       <label for="friendcode_id">Friend Code</label>
@@ -92,7 +94,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="mb-3 mx-3 form-floating">
       <select name="region" class="form-select" id="region_id">
         <optgroup label="From Profile">
-          <option selected><?php echo $user['region'] ?></option>  
+          <option selected>
+            <?php echo $user['region'] ?>
+          </option>
         </optgroup>
         <optgroup label="General">
           <option value="Baja California">Baja California</option>
@@ -129,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 
     <div class="form-floating row mb-3 mx-3">
-      <input type="text" name="gsp" class="form-control" placeholder="Self Rating" value=<?php echo $user['self_rating']?>>
+      <input type="text" name="gsp" class="form-control" placeholder="Self Rating" value=<?php echo $user['self_rating'] ?>>
       <label for="gsp">GSP</label>
     </div>
 
@@ -137,7 +141,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="form-floating row mb-3 mx-3">
       <select id="character_id" name="character" class="form-select">
         <optgroup label="From Profile">
-          <option selected><?php echo $user['character_name']?></option>
+          <option selected>
+            <?php echo $user['character_name'] ?>
+          </option>
         </optgroup>
         <optgroup label="General">
           <?php foreach ($list_of_characters as $characters): ?>
@@ -153,14 +159,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <!-- ruleset_id -->
     <div class="form-floating row mb-3 mx-3">
-      <input type="text" name="ruleset_id" class="form-control" placeholder="Ruleset" value=<?php echo $user['ruleset_id']?>>
+      <input type="text" name="ruleset_id" class="form-control" placeholder="Ruleset" value=<?php echo $user['ruleset_id'] ?>>
       <label for="ruleset_id">Rule Set</label>
     </div>
 
     <div class="row mb-3 mx-3">
       <div class="col-12 text-center">
-        <input type="submit" value="Create" name="createButton" class="btn btn-primary"
-          title="Create!" />
+        <input type="submit" value="Create" name="createButton" class="btn btn-primary" title="Create!" />
       </div>
     </div>
   </form>
