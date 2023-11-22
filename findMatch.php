@@ -130,12 +130,18 @@ if (isset($_SESSION['username'])) {
 
                     </tr>
                     <?php endforeach; ?>
-
-                    <div class="position-fixed bottom-0 end-1 p-3">
-                        <a href="createMatch.php" class="btn btn-primary disabled">Can't find a suitable match? Create one!</a>
-                    </div>
             </table>
+            <div class="position-fixed bottom-0 text-center p-3">
+                        <?php
+                            if (!isset($_SESSION['username']) OR isUserInMatch($_SESSION['username'])['count'] > 0) {
+                                echo "<a href='createMatch.php' class='btn btn-primary disabled'>Can't find a suitable match? Create one!</a>";
+                                echo "<h6>Please login and leave current match, then you can create a match</h6>";
+                            } else {
+                                echo "<a href='createMatch.php' class='btn btn-primary'>Can't find a suitable match? Create one!</a>";
+                            }
+                        ?>
 
+            </div>                            
         </div>
     </div>
 

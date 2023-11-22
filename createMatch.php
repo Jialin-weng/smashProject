@@ -8,7 +8,7 @@ if (isset($_SESSION['username'])) {
 $list_of_characters = getAllCharacters();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (!empty($_POST['createButton'])) {
-    create($_POST['arenacode'], $_POST['username']);
+    create($_POST['arenacode'], $_SESSION['username']);
     header("Location: findMatch.php");
     exit;
   }
@@ -81,11 +81,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
     <!-- username PRIMARY KEY-->
     <div class="form-floating row mb-3 mx-3">
-      <input id="username_id" type="text" class="form-control" name="username" value=<?php echo $user['username'] ?> disabled>
+      <input id="username_id" type="text" class="form-control" name="username" value=<?php echo $user['username']?> disabled>
       <label for="username_id">Username</label>
     </div>
     
-    <!-- password NOT INCLUDED YET IN DB -->
     <div class="form-floating row mb-3 mx-3">
       <input id="friendcode_id" type="text" name="friendcode" class="form-control" value=<?php echo $user['friend_code'] ?> placeholder="Friend Code">
       <label for="friendcode_id">Friend Code</label>

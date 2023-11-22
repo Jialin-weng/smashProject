@@ -137,7 +137,7 @@ function create($arenacode, $username)
 {
     global $db;
     $dummy_user = "DUMMY_USER";
-    $query = "insert into Arena values (:username1, :username2, :arena_code)";
+    $query = "INSERT INTO Arena (username1, username2, arena_code) VALUES (:username1, :username2, :arena_code)";
     $statement = $db->prepare($query);
     $statement->bindValue(':username1', $username);
     $statement->bindValue(':username2', $dummy_user);
@@ -155,5 +155,17 @@ function updateArena($username1, $username2)
     $statement->bindValue(':username2', $username2);
     $statement->execute();
     $statement->closeCursor();
+}
+
+function isUserInMatch($username)
+{
+    global $db;
+    $query = "SELECT COUNT(*) AS count FROM `Arena` WHERE username1 = :username OR username2 = :username";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':username', $username);
+    $statement->execute();
+    $results = $statement->fetch();
+    $statement->closeCursor();
+    return $results;
 }
 ?>
