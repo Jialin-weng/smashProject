@@ -133,6 +133,24 @@ function signUp($username, $first_name, $last_name, $friend_code, $region, $self
     $statement->closeCursor();
 }
 
+function updateProfile($oldusername, $username, $first_name, $last_name, $friend_code, $region, $self_rating, $character_name, $ruleset_id)
+{
+    global $db;
+    $query = "update Users set username = :username, first_name = :first_name, last_name = :last_name,friend_code = :friend_code,region = :region,self_rating = :self_rating, character_name = :character_name, ruleset_id = :ruleset_id WHERE username = :oldusername";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':oldusername', $oldusername);
+    $statement->bindValue(':username', $username);
+    $statement->bindValue(':first_name', $first_name);
+    $statement->bindValue(':last_name', $last_name);
+    $statement->bindValue(':friend_code', $friend_code);
+    $statement->bindValue(':region', $region);
+    $statement->bindValue(':self_rating', $self_rating);
+    $statement->bindValue(':character_name', $character_name);
+    $statement->bindValue(':ruleset_id', $ruleset_id);
+    $statement->execute();
+    $statement->closeCursor();
+}
+
 function create($arenacode, $username)
 {
     global $db;
