@@ -53,6 +53,9 @@ $list_of_grabsOptions = getGrabOptionsByCharacterName($characterName);
                     echo '<li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>';
                 } else {
                     echo '<li class="nav-item"><a class="nav-link" href="profile.php">Profile</a></li>';
+                    echo '<form class="d-flex ms-auto" action="search.php" method="post">
+          <input class="form-control me-2" type="text" name="searchUsername" placeholder="Search for a user" required>
+          <button class="btn btn-outline-light" type="submit">Search</button></form>';
                 }
                 ?>
             </ul>
@@ -228,6 +231,7 @@ $list_of_grabsOptions = getGrabOptionsByCharacterName($characterName);
             <div class="position-fixed bottom-0 end-0 p-3">
                 <a href="characters.php" class="btn btn-primary">Back</a>
             </div>
+
             <?php
             ?>
         </table>

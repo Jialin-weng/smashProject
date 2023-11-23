@@ -56,6 +56,9 @@ if (!isset($_SESSION['username'])) {
                     echo '<li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>';
                 } else {
                     echo '<li class="nav-item"><a class="nav-link" href="profile.php">Profile</a></li>';
+                    echo '<form class="d-flex ms-auto" action="search.php" method="post">
+          <input class="form-control me-2" type="text" name="searchUsername" placeholder="Search for a user" required>
+          <button class="btn btn-outline-light" type="submit">Search</button></form>';
                 }
                 ?>
             </ul>

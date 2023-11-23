@@ -11,6 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $passwordInputed = isset($_POST['userPassword']) ? $_POST['userPassword'] : '';
     echo $usernameInputed;
     $user = getUserByUsername($usernameInputed);
+    $_SESSION['user'] = $user;
     if ($user && password_verify($passwordInputed, $user['password'])) {
       $_SESSION['username'] = $usernameInputed;
       header("Location: profile.php");
@@ -71,8 +72,12 @@ if (isset($_SESSION['signup_success']) && $_SESSION['signup_success']) {
         <?php
         if (!isset($_SESSION['username'])) {
           echo '<li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>';
+
         } else {
           echo '<li class="nav-item"><a class="nav-link" href="profile.php">Profile</a></li>';
+          echo '<form class="d-flex ms-auto" action="search.php" method="post">
+          <input class="form-control me-2" type="text" name="searchUsername" placeholder="Search for a user" required>
+          <button class="btn btn-outline-light" type="submit">Search</button></form>';
         }
         ?>
       </ul>
