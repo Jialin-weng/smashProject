@@ -9,6 +9,17 @@ function getAllCharacters()
     $statement->closeCursor();
     return $results;
 }
+
+function getAllUsers()
+{
+    global $db;
+    $query = "select * from Users order by self_rating Desc";
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $results = $statement->fetchAll();
+    $statement->closeCursor();
+    return $results;
+}
 function getUserByUsername($username)
 {
     global $db;
@@ -133,6 +144,29 @@ function signUp($username, $first_name, $last_name, $friend_code, $region, $self
     $statement->closeCursor();
 }
 
+function createHighlight($highlight_id, $video, $username)
+{
+    global $db;
+    $query = "INSERT INTO Highlights (highlight_id,thumbnail, video, username) VALUES (:highlight_id, :thumbnail, :video, :username)";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':highlight_id', $highlight_id);
+    $statement->bindValue(':thumbnail', null);
+    $statement->bindValue(':video', $video);
+    $statement->bindValue(':username', $username);
+    $statement->execute();
+    $statement->closeCursor();
+}
+
+function getLatestHighlight()
+{
+    global $db;
+    $query = "SELECT * FROM Highlights ORDER BY highlight_id DESC LIMIT 1";
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $result = $statement->fetch(PDO::FETCH_ASSOC);
+    $statement->closeCursor();
+    return $result;
+}
 function updateProfile($oldusername, $username, $first_name, $last_name, $friend_code, $region, $self_rating, $character_name, $ruleset_id)
 {
     global $db;
