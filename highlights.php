@@ -1,7 +1,8 @@
 <?php
+session_start();
+
 require("connect-db.php");
 require("db_functions.php");
-session_start();
 $list_of_highlights = getAllHighlights();
 ?>
 
@@ -14,6 +15,7 @@ $list_of_highlights = getAllHighlights();
     <title>Smash</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 
 
@@ -25,6 +27,7 @@ $list_of_highlights = getAllHighlights();
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Menu
+
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="characters.php">Characters</a></li>
@@ -61,7 +64,7 @@ $list_of_highlights = getAllHighlights();
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
         </script>
     <div class="container text-center">
-        <h1>Highlights</h1>
+        <h1>Highlights </h1>
         <div class="row row-cols-2">
 
             <?php foreach ($list_of_highlights as $highlights): ?>
@@ -85,6 +88,38 @@ $list_of_highlights = getAllHighlights();
                 </div>
             <?php endforeach; ?>
 
+        </div>
+    </div>
+
+    <?php
+    if (isset($_SESSION["username"])) {
+        echo '<div class="position-fixed bottom-0 end-0 p-3">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#highlightform">
+        Submit Youtube Clips
+    </button>
+    </div>';
+
+    }
+    ?>
+    <div class="modal fade" id="highlightform" tabindex="-1" aria-labelledby="label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="label">Submit Highlight Clip</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Your form goes here -->
+                    <form action="highlightSubmit.php" method="post">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Link</label>
+                            <input type="url" class="form-control" id="exampleFormControlInput1"
+                                placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ" name="videoLink" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </body>

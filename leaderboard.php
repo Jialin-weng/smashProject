@@ -1,5 +1,8 @@
 <?php
+require("connect-db.php");
+require("db_functions.php");
 session_start();
+$list_of_users = getAllUsers();
 
 ?>
 <!doctype html>
@@ -11,6 +14,7 @@ session_start();
   <title>Smash</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 
 
@@ -20,7 +24,7 @@ session_start();
       <ul class="navbar-nav">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Menu <i class="bi bi-list"></i>
+            Menu
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="characters.php">Characters</a></li>
@@ -53,10 +57,43 @@ session_start();
 
 
 <body>
-  <h1>leaderboard</h1>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
+  <div class="container mt-5 text-center">
+
+    <h1 class="text-center mt-4">Leaderboard</h1>
+
+    <table class="table table-bordered table-striped mx-auto" style="width:70%">
+      <td>Rank</td>
+      <td>User</td>
+      <td>Main</td>
+      <td>Rating</td>
+      <?php
+      $counter = 1;
+      foreach ($list_of_users as $rankedUser): ?>
+        <tr class="friend-row">
+
+          <td>
+            <?php echo $counter; ?>
+          </td>
+          <td>
+            <?php echo $rankedUser['username']; ?>
+          </td>
+          <td>
+            <?php echo $rankedUser['character_name']; ?>
+          </td>
+          <td>
+            <?php echo $rankedUser['self_rating']; ?>
+          </td>
+
+        </tr>
+        <?php
+        $counter++;
+      endforeach; ?>
+    </table>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"></script>
+
+  </div>
 </body>
 
 </html>
