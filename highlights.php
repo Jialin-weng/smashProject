@@ -95,7 +95,9 @@ $list_of_highlights = getAllHighlights();
     if (isset($_SESSION["username"])) {
         echo '<div class="position-fixed bottom-0 end-0 p-3">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#highlightform">
-        Submit Youtube Clips
+        
+        Submit Clips
+        <i class="bi bi-plus-circle-fill"></i>
     </button>
     </div>';
 
@@ -112,7 +114,7 @@ $list_of_highlights = getAllHighlights();
                     <!-- Your form goes here -->
                     <form action="highlightSubmit.php" method="post">
                         <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Link</label>
+                            <label for="exampleFormControlInput1" class="form-label">Youtube Link</label>
                             <input type="url" class="form-control" id="exampleFormControlInput1"
                                 placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ" name="videoLink" required>
                         </div>
