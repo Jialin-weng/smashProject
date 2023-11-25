@@ -31,7 +31,17 @@ function getUserByUsername($username)
     $statement->closeCursor();
     return $user;
 }
-
+function getHighlightByUsername($username)
+{
+    global $db;
+    $query = "select * from Highlights where username = :username";
+    $statement = $db->prepare($query);
+    $statement->bindParam(':username', $username);
+    $statement->execute();
+    $results = $statement->fetchAll();
+    $statement->closeCursor();
+    return $results;
+}
 
 function getAttacksByCharacterName($characterName)
 {
@@ -241,5 +251,18 @@ function deleteMatch($username)
     $statement->bindValue(':username', $username);
     $statement->execute();
     $statement->closeCursor();
+}
+
+function deleteHighlight($highlight_id)
+{
+    global $db;
+    $query = "delete from Highlights where highlight_id = :highlight_id";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':highlight_id', $highlight_id);
+    $statement->execute();
+    $statement->closeCursor();
+
+
+
 }
 ?>

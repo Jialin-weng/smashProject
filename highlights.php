@@ -75,7 +75,6 @@ $list_of_highlights = getAllHighlights();
                 $videoId = isset($queryParameters['v']) ? $queryParameters['v'] : '';
                 $embedUrl = "https://www.youtube.com/embed/" . $videoId;
                 ?>
-
                 <div class="col" style="margin-top: 20px; margin-bottom: 20px;">
                     <h4>
                         <?php echo $highlights['username'];
