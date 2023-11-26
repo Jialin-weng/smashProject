@@ -1,9 +1,11 @@
 <?php
-session_start();
-
 require("connect-db.php");
 require("db_functions.php");
-$list_of_highlights = getAllHighlights();
+$list_of_rulesets = getAllRulesets();
+session_start();
+if (isset($_SESSION['username'])) {
+    $user = getUserByUsername($_SESSION['username']);
+}
 ?>
 
 <!doctype html>
@@ -15,7 +17,6 @@ $list_of_highlights = getAllHighlights();
     <title>Smash</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 
 
@@ -27,7 +28,6 @@ $list_of_highlights = getAllHighlights();
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Menu
-
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="characters.php">Characters</a></li>
@@ -64,66 +64,56 @@ $list_of_highlights = getAllHighlights();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
         </script>
-    <div class="container text-center">
-        <h1>Highlights </h1>
+
+    <div class="container mt-5 text-center">
+        <h1>Rulesets</h1>
+
+        <!-- need to add friend code, ruleset, character, level of play from User1 -->
+        <!-- query language:
+        username1, username2, arena_code, friend_code, region, self_rating, character_name, r.hazards, r.smash_meter, r.objective, r.stage, r.items, r.time
+-->
+        <!-- let User1 be the arena creator, and temporarily assign a "dummy" user to them. Let other users join this row. 
+            Once two legitimate users have joined a row, gray it out/make it non-joinable. Once, User1 leaves the arena, then we can delete the row from the database
+-->
         <div class="row row-cols-2">
+            <table class="table table-bordered table-striped mx-auto" style="width:70%">
+                <th>Ruleset ID</th>
+                <th>Hazards</th>
+                <th>Smash Meter</th>
+                <th>Type</th>
+                <th>Stage</th>
+                <th>Items</th>
+                <th>Time</th>
 
-            <?php foreach ($list_of_highlights as $highlights): ?>
-                <?php
-                $youtubeUrl = $highlights['video'];
-                $urlParts = parse_url($youtubeUrl);
-                parse_str($urlParts['query'], $queryParameters);
-                $videoId = isset($queryParameters['v']) ? $queryParameters['v'] : '';
-                $embedUrl = "https://www.youtube.com/embed/" . $videoId;
-                ?>
-                <div class="col" style="margin-top: 20px; margin-bottom: 20px;">
-                    <h4>
-                        <?php echo $highlights['username'];
-                        ; ?>
-                    </h4>
-
-                    <iframe width="560" height="315" src="<?php echo $embedUrl; ?>" frameborder="0"
-                        allowfullscreen></iframe>
-
-                </div>
-            <?php endforeach; ?>
-
+                <?php foreach ($list_of_rulesets as $ruleset): ?>
+                    <tr class="friend-row">
+                        <td>
+                            <?php echo $ruleset['ruleset_id']; ?>
+                        </td>
+                        <td>
+                            <?php echo $ruleset['hazards']; ?>
+                        </td>
+                        <td>
+                            <?php echo $ruleset['smash_meter']; ?>
+                        </td>
+                        <td>
+                            <?php echo $ruleset['objective']; ?>
+                        </td>                        
+                        <td>
+                            <?php echo $ruleset['stage']; ?>
+                        </td>                        
+                        <td>
+                            <?php echo $ruleset['items']; ?>
+                        </td>                        
+                        <td>
+                            <?php echo $ruleset['time']; ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
         </div>
     </div>
 
-    <?php
-    if (isset($_SESSION["username"])) {
-        echo '<div class="position-fixed bottom-0 end-0 p-3">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#highlightform">
-        
-        Submit Clips
-        <i class="bi bi-plus-circle-fill"></i>
-    </button>
-    </div>';
-
-    }
-    ?>
-    <div class="modal fade" id="highlightform" tabindex="-1" aria-labelledby="label" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="label">Submit Highlight Clip</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- Your form goes here -->
-                    <form action="highlightSubmit.php" method="post">
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput1" class="form-label">Youtube Link</label>
-                            <input type="url" class="form-control" id="exampleFormControlInput1"
-                                placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ" name="videoLink" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 </body>
 
 </html>

@@ -51,7 +51,7 @@ session_start();
                         <li><a class="dropdown-item" href="findMatch.php">Find Match</a></li>
                         <li><a class="dropdown-item" href="highlights.php">Highlights</a></li>
                         <li><a class="dropdown-item" href="leaderboard.php">Leaderboard</a></li>
-
+                        <li><a class="dropdown-item" href="rulesets.php">Rulesets</a></li>
                     </ul>
                 </li>
             </ul>

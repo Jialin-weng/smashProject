@@ -25,6 +25,7 @@
                         <!-- <li><hr class="dropdown-divider"></li> -->
                         <li><a class="dropdown-item" href="highlights.php">Highlights</a></li>
                         <li><a class="dropdown-item" href="leaderboard.php">Leaderboard</a></li>
+                        <li><a class="dropdown-item" href="rulesets.php">Rulesets</a></li>
 
                     </ul>
                 </li>
