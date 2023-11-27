@@ -7,7 +7,7 @@ require("db_functions.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (!empty($_POST['loginBtn'])) {
-    $usernameInputed = isset($_POST['username']) ? $_POST['username'] : '';
+    $usernameInputed = isset($_POST['username']) ? htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8') : '';
     $passwordInputed = isset($_POST['userPassword']) ? $_POST['userPassword'] : '';
     echo $usernameInputed;
     $user = getUserByUsername($usernameInputed);

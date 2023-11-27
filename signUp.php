@@ -6,7 +6,17 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (!empty($_POST['signupButton'])) {
     $hashedPassword = password_hash($_POST['userPassword'], PASSWORD_DEFAULT);
-    signUp($_POST['username'], $_POST['firstName'], $_POST['lastName'], $_POST['friendCode'], $_POST['region'], $_POST['selfrating'], $_POST['character'], $_POST['ruleset_id'], $hashedPassword);
+    signUp(
+      htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8'),
+      htmlspecialchars($_POST['firstName'], ENT_QUOTES, 'UTF-8'),
+      htmlspecialchars($_POST['lastName'], ENT_QUOTES, 'UTF-8'),
+      htmlspecialchars($_POST['friendCode'], ENT_QUOTES, 'UTF-8'),
+      htmlspecialchars($_POST['region'], ENT_QUOTES, 'UTF-8'),
+      htmlspecialchars($_POST['selfrating'], ENT_QUOTES, 'UTF-8'),
+      htmlspecialchars($_POST['character'], ENT_QUOTES, 'UTF-8'),
+      htmlspecialchars($_POST['ruleset_id'], ENT_QUOTES, 'UTF-8'),
+      $hashedPassword
+    );
     $_SESSION['signup_success'] = true;
     header("Location: login.php");
     exit;

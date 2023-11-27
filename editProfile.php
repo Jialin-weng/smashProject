@@ -3,16 +3,35 @@ require("connect-db.php");
 require("db_functions.php");
 $list_of_characters = getAllCharacters();
 session_start();
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (!empty($_POST['confirmBtn'])) {
-        updateProfile($_SESSION["username"], $_POST['username'], $_POST['firstName'], $_POST['lastName'], $_POST['friendCode'], $_POST['region'], $_POST['selfrating'], $_POST['character'], $_POST['ruleset_id']);
-        $user = getUserByUsername($_POST['username']);
-        $_SESSION['user'] = $user;
-        $_SESSION['username'] = $_POST['username'];
-        header("Location: profile.php");
-        exit;
-    }
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['confirmBtn'])) {
+    $usernameInputed = htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8');
+    $firstNameInputed = htmlspecialchars($_POST['firstName'], ENT_QUOTES, 'UTF-8');
+    $lastNameInputed = htmlspecialchars($_POST['lastName'], ENT_QUOTES, 'UTF-8');
+    $friendCodeInputed = htmlspecialchars($_POST['friendCode'], ENT_QUOTES, 'UTF-8');
+    $regionInputed = htmlspecialchars($_POST['region'], ENT_QUOTES, 'UTF-8');
+    $selfRatingInputed = htmlspecialchars($_POST['selfrating'], ENT_QUOTES, 'UTF-8');
+    $characterInputed = htmlspecialchars($_POST['character'], ENT_QUOTES, 'UTF-8');
+    $rulesetIdInputed = htmlspecialchars($_POST['ruleset_id'], ENT_QUOTES, 'UTF-8');
+
+    updateProfile(
+        $_SESSION["username"],
+        $usernameInputed,
+        $firstNameInputed,
+        $lastNameInputed,
+        $friendCodeInputed,
+        $regionInputed,
+        $selfRatingInputed,
+        $characterInputed,
+        $rulesetIdInputed
+    );
+
+    $user = getUserByUsername($usernameInputed);
+    $_SESSION['user'] = $user;
+    $_SESSION['username'] = $usernameInputed;
+    header("Location: profile.php");
+    exit;
 }
+
 ?>
 
 <!doctype html>

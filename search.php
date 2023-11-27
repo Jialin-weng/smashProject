@@ -6,7 +6,7 @@ require("db_functions.php");
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!empty($_POST['searchUsername'])) {
         // Sanitize the input to prevent SQL injection
-        $searchedUsername = htmlspecialchars($_POST['searchUsername']);
+        $searchedUsername = htmlspecialchars($_POST['searchUsername'], ENT_QUOTES, 'UTF-8');
 
         // Search for the user by username
         $foundUser = getUserByUsername($searchedUsername);
