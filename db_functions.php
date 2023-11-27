@@ -136,6 +136,18 @@ function getAllMatches()
     $statement->closeCursor();
     return $results;
 }
+
+function getAllRulesets()
+{
+    global $db;
+    $query = "SELECT * FROM Ruleset;";
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $results = $statement->fetchAll();
+    $statement->closeCursor();
+    return $results;
+}
+
 function signUp($username, $first_name, $last_name, $friend_code, $region, $self_rating, $character_name, $ruleset_id, $password)
 {
     global $db;
