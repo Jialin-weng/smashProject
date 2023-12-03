@@ -270,7 +270,7 @@ function viewMatch($username)
 function deleteMatch($username)
 {
     global $db;
-    $query = "DELETE FROM Arena WHERE username1=:username OR username2=:username";
+    $query = "SET @p0=:username; CALL `deleteArena`(@p0)";
     $statement = $db->prepare($query);
     $statement->bindValue(':username', $username);
     $statement->execute();
