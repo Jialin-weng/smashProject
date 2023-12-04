@@ -69,42 +69,56 @@ $list_of_grabsOptions = getGrabOptionsByCharacterName($characterName);
 <body>
     <div class="container mt-5 text-center">
 
-        <h1 class="display-2"><?php echo $characterName; ?></h1>
+        <h1 class="display-2">
+            <?php echo $characterName; ?>
+        </h1>
         <br>
         <br>
         <div class="row align-items-center">
             <div class="col">
                 <img src="<?php echo $c_name_jpg; ?>" alt="Friend's Image" width="350">
             </div>
-                <div class="col">
-                    <td>
-                        <?php foreach ($information as $info): ?>
-                        <table class="table table-bordered" style="width:85%">
-                            <thead>
-                                <tr>
-                                    <td scope="row"><strong>Company</strong></td>
-                                    <td scope="row"> <?php echo $info['company']; ?> </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                             <tr>
-                                    <td scope="row"><strong>Franchise</strong></td>
-                                    <td scope="row"> <?php echo $info['franchise']; ?> </th>
-                                </tr>
-                                <tr>
-                                    <td scope="row"><strong>Weight</strong></td>
-                                    <td scope="row"> <?php echo $info['weight']; ?> </th>
-                                </tr>
-                                <tr>
-                                    <td scope="row"><strong>Speed</strong></td>
-                                    <td scope="row"> <?php echo $info['speed']; ?> </th>
-                                </tr>
-                            </tbody>
-                            </table>
-                            <?php endforeach; ?>
-                    </td>
-                </div>
+            <div class="col">
+                <td>
+                    <table class="table table-bordered" style="width:85%">
+                        <thead>
+                            <tr>
+                                <td scope="row"><strong>Company</strong></td>
+                                <td scope="row">
+                                    <?php echo $information['company']; ?>
+                                    </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td scope="row"><strong>Franchise</strong></td>
+                                <td scope="row">
+                                    <?php echo $information['franchise']; ?>
+                                    </th>
+                            </tr>
+                            <tr>
+                                <td scope="row"><strong>Weight</strong></td>
+                                <td scope="row">
+                                    <?php echo $information['weight']; ?>
+                                    </th>
+                            </tr>
+                            <tr>
+                                <td scope="row"><strong>Speed</strong></td>
+                                <td scope="row">
+                                    <?php echo $information['speed']; ?>
+                                    </th>
+                            </tr>
+                            <tr>
+                                <td scope="row"><strong>Popularity</strong></td>
+                                <td scope="row">
+                                    <?php echo $information['popularity_count']; ?>
+                                    </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
             </div>
+        </div>
         <br>
         <br>
 
@@ -147,7 +161,7 @@ $list_of_grabsOptions = getGrabOptionsByCharacterName($characterName);
 
         <h2 class="text-center mt-4">Aerial Attacks</h2>
         <table class="table table-bordered table-striped mx-auto" style="width:70%">
-        <td><strong>Move Name</strong></td>
+            <td><strong>Move Name</strong></td>
             <td><strong>Shield Stun</strong></td>
             <td><strong>Startup</strong></td>
             <td><strong>End Lag</strong></td>
@@ -195,7 +209,7 @@ $list_of_grabsOptions = getGrabOptionsByCharacterName($characterName);
                 <tr class="friend-row">
 
                     <td>
-                    <?php echo $grab['move_name']; ?>
+                        <?php echo $grab['move_name']; ?>
                     </td>
                     <td>
                         <?php echo $grab['start_up_frames']; ?>
@@ -213,7 +227,7 @@ $list_of_grabsOptions = getGrabOptionsByCharacterName($characterName);
             ?>
         </table>
 
-    
+
         <h2 class="text-center mt-4">Grab Options</h2>
         <table class="table table-bordered table-striped mx-auto" style="width:70%">
             <td><strong>Move Name</strong></td>

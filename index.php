@@ -83,5 +83,22 @@ session_start();
         </script>
     <script src="https://unpkg.com/page/page.js"></script>
 </body>
+<?php
+if (isset($_SESSION['search_error'])) {
+    echo '
+    <div id="searchErrorAlert" class="alert alert-danger alert-dismissible fade show" role="alert">
+        ' . $_SESSION['search_error'] . '
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <script>
+        // Auto-close the alert after 5 seconds
+        setTimeout(function() {
+            document.getElementById("searchErrorAlert").remove();
+        }, 5000);
+    </script>';
+
+    unset($_SESSION['search_error']);
+}
+?>
 
 </html>

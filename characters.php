@@ -67,6 +67,11 @@ $list_of_characters = getAllCharacters();
 </body>
 <div class="container text-center">
     <h1>Characters</h1>
+    <form class="d-flex mb-3" action="searchCharacter.php" method="post">
+        <input class="form-control me-2" type="text" name="searchCharacter" placeholder="Search for a character"
+            required>
+        <button class="btn btn-outline-primary" type="submit">Search</button>
+    </form>
     <div class="row row-cols-4">
         <?php foreach ($list_of_characters as $characters): ?>
             <?php

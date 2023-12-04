@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 require("connect-db.php");
 require("db_functions.php");
 

@@ -20,17 +20,7 @@ function getAllUsers()
     $statement->closeCursor();
     return $results;
 }
-function getUserByUsername($username)
-{
-    global $db;
-    $query = "select * from Users where username = :username";
-    $statement = $db->prepare($query);
-    $statement->bindParam(':username', $username);
-    $statement->execute();
-    $user = $statement->fetch(PDO::FETCH_ASSOC);
-    $statement->closeCursor();
-    return $user;
-}
+
 function getHighlightByUsername($username)
 {
     global $db;
@@ -122,9 +112,21 @@ function getInfoByCharacterName($characterName)
     $statement = $db->prepare($query);
     $statement->bindParam(':characterName', $characterName);
     $statement->execute();
-    $results = $statement->fetchAll();
+    $results = $statement->fetch(PDO::FETCH_ASSOC);
     $statement->closeCursor();
     return $results;
+}
+
+function getUserByUsername($username)
+{
+    global $db;
+    $query = "select * from Users where username = :username";
+    $statement = $db->prepare($query);
+    $statement->bindParam(':username', $username);
+    $statement->execute();
+    $user = $statement->fetch(PDO::FETCH_ASSOC);
+    $statement->closeCursor();
+    return $user;
 }
 
 function getAllHighlights()
